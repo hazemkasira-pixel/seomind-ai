@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
+import { Toaster } from 'sonner'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     creator: '@hazemkasira',
   },
   verification: {
-    google: '', // هتضيفه بعدين لو عايز
+    google: '', 
   },
 }
 
@@ -56,7 +57,11 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body>{children}</body>
+        <body className="antialiased">
+          {children}
+          {/* إضافة الإشعارات المنبثقة الاحترافية */}
+          <Toaster position="top-center" richColors />
+        </body>
       </html>
     </ClerkProvider>
   )

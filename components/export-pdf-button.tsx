@@ -3,6 +3,7 @@
 import { Download } from 'lucide-react'
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
+import { toast } from 'sonner'
 
 type ExportPdfButtonProps = {
   analysis: {
@@ -21,138 +22,136 @@ type ExportPdfButtonProps = {
 
 export function ExportPdfButton({ analysis }: ExportPdfButtonProps) {
   const handleExport = () => {
-    const doc = new jsPDF()
-    const pageWidth = doc.internal.pageSize.getWidth()
-    let y = 20
+    try {
+      const doc = new jsPDF()
+      const pageWidth = doc.internal.pageSize.getWidth()
+      let y = 20
 
-    // Header
-    doc.setFillColor(13, 148, 136)
-    doc.rect(0, 0, pageWidth, 40, 'F')
-    doc.setTextColor(255, 255, 255)
-    doc.setFontSize(24)
-    doc.text('SEOMind AI', 20, 25)
-    doc.setFontSize(12)
-    doc.text('SEO Analysis Report', 20, 33)
+      // Header
+      doc.setFillColor(13, 148, 136)
+      doc.rect(0, 0, pageWidth, 40, 'F')
+      doc.setTextColor(255, 255, 255)
+      doc.setFontSize(24)
+      doc.text('SEOMind AI', 20, 25)
+      doc.setFontSize(12)
+      doc.text('SEO Analysis Report', 20, 33)
 
-    y = 50
+      y = 50
 
-    // Report Info
-    doc.setTextColor(0, 0, 0)
-    doc.setFontSize(10)
-    doc.text(`Generated: ${new Date(analysis.created_at).toLocaleDateString()}`, 20, y)
-    y += 10
-
-    // Website Info
-    doc.setFontSize(14)
-    doc.setTextColor(13, 148, 136)
-    doc.text('Website Information', 20, y)
-    y += 8
-
-    doc.setFontSize(10)
-    doc.setTextColor(0, 0, 0)
-    doc.text(`URL: ${analysis.url}`, 20, y)
-    y += 6
-    doc.text(`Niche: ${analysis.niche}`, 20, y)
-    y += 6
-    doc.text(`Location: ${analysis.location}`, 20, y)
-    y += 10
-
-    // SEO Score
-    doc.setFontSize(14)
-    doc.setTextColor(13, 148, 136)
-    doc.text('SEO Health Score', 20, y)
-    y += 8
-
-    doc.setFontSize(24)
-    const scoreColor = analysis.seo_score >= 80 ? [13, 148, 136] : analysis.seo_score >= 60 ? [234, 179, 8] : [239, 68, 68]
-    doc.setTextColor(scoreColor[0], scoreColor[1], scoreColor[2])
-    doc.text(`${analysis.seo_score}/100`, 20, y)
-    y += 10
-
-    // Issues
-    if (analysis.issues && analysis.issues.length > 0) {
-      doc.setFontSize(14)
-      doc.setTextColor(239, 68, 68)
-      doc.text('Critical Issues', 20, y)
-      y += 8
-
-      doc.setFontSize(10)
+      // Report Info
       doc.setTextColor(0, 0, 0)
-      analysis.issues.forEach((issue, index) => {
-        const splitText = doc.splitTextToSize(`${index + 1}. ${issue}`, pageWidth - 40)
-        doc.text(splitText, 20, y)
-        y += splitText.length * 5 + 3
-      })
-      y += 5
-    }
+      doc.setFontSize(10)
+      doc.text(`Generated: ${new Date(analysis.created_at).toLocaleDateString()}`, 20, y)
+      y += 10
 
-    // Recommendations
-    if (analysis.recommendations && analysis.recommendations.length > 0) {
+      // Website Info
       doc.setFontSize(14)
       doc.setTextColor(13, 148, 136)
-      doc.text('Recommendations', 20, y)
+      doc.text('Website Information', 20, y)
       y += 8
 
       doc.setFontSize(10)
       doc.setTextColor(0, 0, 0)
-      analysis.recommendations.forEach((rec, index) => {
-        const splitText = doc.splitTextToSize(`${index + 1}. ${rec}`, pageWidth - 40)
-        doc.text(splitText, 20, y)
-        y += splitText.length * 5 + 3
-      })
-      y += 5
-    }
+      doc.text(`URL: ${analysis.url}`, 20, y)
+      y += 6
+      doc.text(`Niche: ${analysis.niche}`, 20, y)
+      y += 6
+      doc.text(`Location: ${analysis.location}`, 20, y)
+      y += 10
 
-    // Keywords
-    if (analysis.keywords && analysis.keywords.length > 0) {
-      doc.setFontSize(14)
-      doc.setTextColor(147, 51, 234)
-      doc.text('Target Keywords', 20, y)
-      y += 8
-
-      doc.setFontSize(10)
-      doc.setTextColor(0, 0, 0)
-      const keywordsText = analysis.keywords.join(', ')
-      const splitKeywords = doc.splitTextToSize(keywordsText, pageWidth - 40)
-      doc.text(splitKeywords, 20, y)
-      y += splitKeywords.length * 5 + 5
-    }
-
-    // Content Strategy
-    if (analysis.content_strategy) {
-      doc.setFontSize(14)
-      doc.setTextColor(234, 179, 8)
-      doc.text('Content Strategy', 20, y)
-      y += 8
-
-      doc.setFontSize(10)
-      doc.setTextColor(0, 0, 0)
-      const splitStrategy = doc.splitTextToSize(analysis.content_strategy, pageWidth - 40)
-      doc.text(splitStrategy, 20, y)
-      y += splitStrategy.length * 5 + 5
-    }
-
-    // Competitor Insights
-    if (analysis.competitor_insights) {
+      // SEO Score
       doc.setFontSize(14)
       doc.setTextColor(13, 148, 136)
-      doc.text('Competitor Insights', 20, y)
+      doc.text('SEO Health Score', 20, y)
       y += 8
 
-      doc.setFontSize(10)
-      doc.setTextColor(0, 0, 0)
-      const splitInsights = doc.splitTextToSize(analysis.competitor_insights, pageWidth - 40)
-      doc.text(splitInsights, 20, y)
+      doc.setFontSize(24)
+      const scoreColor = analysis.seo_score >= 80 ? [13, 148, 136] : analysis.seo_score >= 60 ? [234, 179, 8] : [239, 68, 68]
+      doc.setTextColor(scoreColor[0], scoreColor[1], scoreColor[2])
+      doc.text(`${analysis.seo_score}/100`, 20, y)
+      y += 15
+
+      // Issues
+      if (analysis.issues && analysis.issues.length > 0) {
+        doc.setFontSize(14)
+        doc.setTextColor(239, 68, 68)
+        doc.text('Critical Issues', 20, y)
+        y += 8
+
+        doc.setFontSize(10)
+        doc.setTextColor(0, 0, 0)
+        analysis.issues.forEach((issue, index) => {
+          const splitText = doc.splitTextToSize(`${index + 1}. ${issue}`, pageWidth - 40)
+          doc.text(splitText, 20, y)
+          y += splitText.length * 5 + 3
+        })
+        y += 5
+      }
+
+      // Recommendations
+      if (analysis.recommendations && analysis.recommendations.length > 0) {
+        doc.setFontSize(14)
+        doc.setTextColor(13, 148, 136)
+        doc.text('Recommendations', 20, y)
+        y += 8
+
+        doc.setFontSize(10)
+        doc.setTextColor(0, 0, 0)
+        analysis.recommendations.forEach((rec, index) => {
+          const splitText = doc.splitTextToSize(`${index + 1}. ${rec}`, pageWidth - 40)
+          doc.text(splitText, 20, y)
+          y += splitText.length * 5 + 3
+        })
+        y += 5
+      }
+
+      // Keywords
+      if (analysis.keywords && analysis.keywords.length > 0) {
+        doc.setFontSize(14)
+        doc.setTextColor(147, 51, 234)
+        doc.text('Target Keywords', 20, y)
+        y += 8
+
+        doc.setFontSize(10)
+        doc.setTextColor(0, 0, 0)
+        const keywordsText = analysis.keywords.join(', ')
+        const splitKeywords = doc.splitTextToSize(keywordsText, pageWidth - 40)
+        doc.text(splitKeywords, 20, y)
+        y += splitKeywords.length * 5 + 5
+      }
+
+      // Content Strategy
+      if (analysis.content_strategy) {
+        doc.setFontSize(14)
+        doc.setTextColor(234, 179, 8)
+        doc.text('Content Strategy', 20, y)
+        y += 8
+
+        doc.setFontSize(10)
+        doc.setTextColor(0, 0, 0)
+        const splitStrategy = doc.splitTextToSize(analysis.content_strategy, pageWidth - 40)
+        doc.text(splitStrategy, 20, y)
+        y += splitStrategy.length * 5 + 5
+      }
+
+      // Footer
+      doc.setFontSize(8)
+      doc.setTextColor(128, 128, 128)
+      doc.text('Generated by SEOMind AI - seomind-ai.vercel.app', pageWidth / 2, 285, { align: 'center' })
+
+      // Save PDF
+      const cleanUrl = analysis.url.replace(/^https?:\/\//, '').replace(/\/$/, '')
+      doc.save(`seo-report-${cleanUrl}.pdf`)
+
+      // ✅ إظهار إشعار النجاح
+      toast.success('Report exported successfully!', {
+        description: 'Your SEO analysis PDF has been downloaded.',
+      })
+    } catch (error) {
+      toast.error('Export failed', {
+        description: 'An error occurred while generating the PDF.',
+      })
     }
-
-    // Footer
-    doc.setFontSize(8)
-    doc.setTextColor(128, 128, 128)
-    doc.text('Generated by SEOMind AI - seomind-ai.vercel.app', pageWidth / 2, 285, { align: 'center' })
-
-    // Save PDF
-    const cleanUrl = analysis.url.replace(/^https?:\/\//, '').replace(/\/$/, '')
-    doc.save(`seo-report-${cleanUrl}.pdf`)
   }
 
   return (
