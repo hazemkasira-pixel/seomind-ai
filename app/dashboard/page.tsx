@@ -8,7 +8,7 @@ import {
   Target, Lightbulb, BarChart3, ExternalLink
 } from 'lucide-react'
 import { supabaseAdmin } from '@/lib/supabase-admin'
-import { PublishWordPressButton } from '@/components/publish-wordpress-button'
+import { GenerateArticleButton } from '@/components/generate-article-button' // ✅ استيراد زر توليد المقال الجديد
 
 // ✅ التحميل الكسول (Lazy Loading) لزر الـ PDF لتحسين سرعة الصفحة
 const ExportPdfButton = dynamic(
@@ -152,7 +152,7 @@ export default async function DashboardPage({
         {selectedAnalysis ? (
           <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             
-            {/* ✅ هنا تم إضافة أزرار تصدير الـ PDF والنشر على WordPress جنب بعض */}
+            {/* ✅ هنا تم إضافة زر توليد المقال الجديد وزر الـ PDF جنب بعض */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
               <div className="flex items-center gap-2">
                 <h2 className="text-xl font-bold text-foreground">Detailed Report</h2>
@@ -161,7 +161,7 @@ export default async function DashboardPage({
                 </span>
               </div>
               <div className="flex items-center gap-3">
-                <PublishWordPressButton analysis={selectedAnalysis} />
+                <GenerateArticleButton analysis={selectedAnalysis} />
                 <ExportPdfButton analysis={selectedAnalysis} />
               </div>
             </div>
