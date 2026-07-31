@@ -1,12 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { auth } from '@clerk/nextjs/server' // ✅ استيراد auth من Clerk
 
 export async function POST(request: NextRequest) {
   try {
+    // 1. التحقق من أن المستخدم مسجل دخول
+    const { userId } = await auth()
+    
+    if (!userId) {
+      return NextResponse.json(
+        { error: 'Unauthorized. Please log in to publish.' },
+        { status: 401 }
+      )
+    }
+
     const { title, content } = await request.json()
 
     const wpUrl = process.env.WORDPRESS_URL
     const username = process.env.WORDPRESS_USERNAME
-    // بنشيل المسافات من كلمة المرور عشان الـ Base64 Encoding يشتغل صح
     const password = process.env.WORDPRESS_APP_PASSWORD?.replace(/\s/g, '')
 
     if (!wpUrl || !username || !password) {
@@ -28,7 +38,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         title: title || 'SEO Analysis Report',
         content: content || 'No content provided.',
-        status: 'publish', // غير إلى 'draft' لو عايز تنشر كمسودة الأول
+        status: 'publish',
       }),
     })
 
