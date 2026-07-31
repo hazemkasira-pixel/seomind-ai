@@ -4,9 +4,10 @@ import Link from 'next/link'
 import { 
   LayoutDashboard, Globe, FileText, TrendingUp, Settings, 
   Plus, ArrowLeft, Search, AlertCircle, CheckCircle, 
-  Target, Lightbulb, BarChart3, ExternalLink
+  Target, Lightbulb, BarChart3, ExternalLink, Download
 } from 'lucide-react'
 import { supabaseAdmin } from '@/lib/supabase-admin'
+import { ExportPdfButton } from '@/components/export-pdf-button'
 
 export default async function DashboardPage({
   searchParams,
@@ -97,7 +98,7 @@ export default async function DashboardPage({
           </Link>
         </header>
 
-        {/* --- قسم سجل التحليلات السابقة (الجديد) --- */}
+        {/* --- قسم سجل التحليلات السابقة --- */}
         {analyses && analyses.length > 0 && (
           <div className="mb-8">
             <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
@@ -143,11 +144,16 @@ export default async function DashboardPage({
         {/* --- قسم التقرير التفصيلي --- */}
         {selectedAnalysis ? (
           <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="flex items-center gap-2 mb-4">
-              <h2 className="text-xl font-bold text-foreground">Detailed Report</h2>
-              <span className="text-xs text-muted-foreground bg-border px-2 py-1 rounded">
-                {selectedAnalysis.url.replace(/^https?:\/\//, '')}
-              </span>
+            
+            {/* ✅ هنا تم إضافة زر تصدير الـ PDF */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+              <div className="flex items-center gap-2">
+                <h2 className="text-xl font-bold text-foreground">Detailed Report</h2>
+                <span className="text-xs text-muted-foreground bg-border px-2 py-1 rounded">
+                  {selectedAnalysis.url.replace(/^https?:\/\//, '')}
+                </span>
+              </div>
+              <ExportPdfButton analysis={selectedAnalysis} />
             </div>
 
             {/* SEO Score Card */}
