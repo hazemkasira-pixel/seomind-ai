@@ -1,0 +1,212 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-teal: var(--teal);
+  --color-purple: var(--purple);
+
+  --font-sans: 'Inter', 'Inter Fallback', ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --animate-float: float 8s ease-in-out infinite;
+}
+
+:root {
+  color-scheme: dark;
+  --background: #0d1b2a;
+  --foreground: #ffffff;
+  --card: #1b263b;
+  --card-foreground: #ffffff;
+  --muted: #1b263b;
+  --muted-foreground: #98a2b3;
+  --border: rgba(224, 225, 221, 0.1);
+  --input: rgba(224, 225, 221, 0.08);
+  --ring: #00d4aa;
+
+  --teal: #00d4aa;
+  --purple: #7b2cbf;
+
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate(-50%, -20px) scale(1.08);
+    opacity: 0.75;
+  }
+}
+
+/* Brand gradient text */
+.gradient-text {
+  background-image: linear-gradient(90deg, #00d4aa 0%, #2f9fd8 50%, #7b2cbf 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Animated glowing border for the hero input container */
+.glow-border {
+  position: relative;
+  border-radius: 1.25rem;
+  background: var(--card);
+  box-shadow:
+    0 0 28px -4px rgba(0, 212, 170, 0.4),
+    0 0 48px -6px rgba(123, 44, 191, 0.4),
+    0 20px 60px -20px rgba(0, 0, 0, 0.6);
+}
+/* Soft blurred aura behind the container */
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(120deg, #00d4aa, #7b2cbf, #00d4aa);
+  background-size: 200% 200%;
+  filter: blur(24px);
+  opacity: 0.45;
+  animation: borderShift 6s linear infinite;
+  pointer-events: none;
+}
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -2.5px;
+  border-radius: inherit;
+  padding: 2.5px;
+  background: linear-gradient(120deg, #00d4aa, #7b2cbf, #00d4aa);
+  background-size: 200% 200%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borderShift 6s linear infinite;
+  pointer-events: none;
+}
+@keyframes borderShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+/* Custom dropdown fade-in */
+.animate-dropdown {
+  animation: dropdownIn 0.16s ease-out;
+}
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================ */
+/* Custom Glowing Scrollbar for Dropdowns       */
+/* ============================================ */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00d4aa 0%, #3a7bd5 50%, #7b2cbf 100%);
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 212, 170, 0.5);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00e5bb 0%, #4a8be5 50%, #8b3ccf 100%);
+  box-shadow: 0 0 12px rgba(0, 212, 170, 0.8);
+}
+
+/* Firefox Support */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #00d4aa transparent;
+}
+
+/* Legacy dropdown scroll (kept for backward compatibility) */
+.dropdown-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 212, 170, 0.3) transparent;
+}
+.dropdown-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.dropdown-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.dropdown-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 170, 0.3);
+  border-radius: 9999px;
+}
+.dropdown-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 212, 170, 0.5);
+}
+
+/* ============================================ */
+/* Marquee Animations for Trusted By section    */
+/* ============================================ */
+.marquee-row-1 {
+  animation: marquee-left 30s linear infinite;
+}
+
+.marquee-row-2 {
+  animation: marquee-right 30s linear infinite;
+}
+
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
