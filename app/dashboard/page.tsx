@@ -1,14 +1,20 @@
 import { currentUser } from '@clerk/nextjs/server'
 import { UserButton } from '@clerk/nextjs'
 import Link from 'next/link'
+import dynamic from 'next/dynamic' // ✅ استيراد dynamic للتحسين
 import { 
   LayoutDashboard, Globe, FileText, TrendingUp, Settings, 
   Plus, ArrowLeft, Search, AlertCircle, CheckCircle, 
-  Target, Lightbulb, BarChart3, ExternalLink, Download
+  Target, Lightbulb, BarChart3, ExternalLink
 } from 'lucide-react'
 import { supabaseAdmin } from '@/lib/supabase-admin'
-import { ExportPdfButton } from '@/components/export-pdf-button'
-import { PublishWordPressButton } from '@/components/publish-wordpress-button' // ✅ تمت الإضافة
+import { PublishWordPressButton } from '@/components/publish-wordpress-button'
+
+// ✅ التحميل الكسول (Lazy Loading) لزر الـ PDF لتحسين سرعة الصفحة
+const ExportPdfButton = dynamic(
+  () => import('@/components/export-pdf-button'),
+  { ssr: false }
+)
 
 export default async function DashboardPage({
   searchParams,
