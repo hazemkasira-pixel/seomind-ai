@@ -8,6 +8,7 @@ import {
 } from 'lucide-react'
 import { supabaseAdmin } from '@/lib/supabase-admin'
 import { ExportPdfButton } from '@/components/export-pdf-button'
+import { PublishWordPressButton } from '@/components/publish-wordpress-button' // ✅ تمت الإضافة
 
 export default async function DashboardPage({
   searchParams,
@@ -145,7 +146,7 @@ export default async function DashboardPage({
         {selectedAnalysis ? (
           <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             
-            {/* ✅ هنا تم إضافة زر تصدير الـ PDF */}
+            {/* ✅ هنا تم إضافة أزرار تصدير الـ PDF والنشر على WordPress جنب بعض */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
               <div className="flex items-center gap-2">
                 <h2 className="text-xl font-bold text-foreground">Detailed Report</h2>
@@ -153,7 +154,10 @@ export default async function DashboardPage({
                   {selectedAnalysis.url.replace(/^https?:\/\//, '')}
                 </span>
               </div>
-              <ExportPdfButton analysis={selectedAnalysis} />
+              <div className="flex items-center gap-3">
+                <PublishWordPressButton analysis={selectedAnalysis} />
+                <ExportPdfButton analysis={selectedAnalysis} />
+              </div>
             </div>
 
             {/* SEO Score Card */}
