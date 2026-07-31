@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 function GithubIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -27,15 +28,28 @@ function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
 const columns = [
   {
     title: 'Product',
-    links: ['Features', 'Pricing', 'How it Works', 'Roadmap'],
+    links: [
+      { label: 'Features', href: '/#features' },
+      { label: 'Pricing', href: '/#pricing' },
+      { label: 'How it Works', href: '/#how-it-works' },
+      { label: 'Dashboard', href: '/dashboard' },
+    ],
   },
   {
     title: 'Company',
-    links: ['About', 'Blog', 'Careers', 'Contact'],
+    links: [
+      { label: 'About', href: '/#about' },
+      { label: 'Contact', href: 'mailto:support@seomind-ai.com' },
+      { label: 'GitHub', href: 'https://github.com/hazemkasira-pixel/seomind-ai', external: true },
+    ],
   },
   {
     title: 'Legal',
-    links: ['Privacy Policy', 'Terms & Conditions', 'Cookies'],
+    links: [
+      { label: 'Privacy Policy', href: '/privacy' },
+      { label: 'Terms & Conditions', href: '/terms' },
+      { label: 'Cookies', href: '/privacy' },
+    ],
   },
 ]
 
@@ -62,13 +76,24 @@ export function SiteFooter() {
               <h3 className="font-bold">{col.title}</h3>
               <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-muted-foreground transition-colors hover:text-teal"
-                    >
-                      {link}
-                    </a>
+                  <li key={link.label}>
+                    {link.external ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground transition-colors hover:text-teal"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-muted-foreground transition-colors hover:text-teal"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -81,13 +106,27 @@ export function SiteFooter() {
             © 2026 SEOMind AI. All rights reserved.
           </p>
           <div className="flex items-center gap-5 text-muted-foreground">
-            <a href="#" aria-label="GitHub" className="transition-colors hover:text-teal">
+            <a 
+              href="https://github.com/hazemkasira-pixel/seomind-ai" 
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub" 
+              className="transition-colors hover:text-teal"
+            >
               <GithubIcon className="h-5 w-5" />
             </a>
-            <a href="#" aria-label="Twitter" className="transition-colors hover:text-teal">
+            <a 
+              href="#" 
+              aria-label="Twitter" 
+              className="transition-colors hover:text-teal"
+            >
               <TwitterIcon className="h-5 w-5" />
             </a>
-            <a href="#" aria-label="LinkedIn" className="transition-colors hover:text-teal">
+            <a 
+              href="#" 
+              aria-label="LinkedIn" 
+              className="transition-colors hover:text-teal"
+            >
               <LinkedinIcon className="h-5 w-5" />
             </a>
           </div>
