@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { FileText, Send, Eye, X } from 'lucide-react'
 import { toast } from 'sonner'
+import { useTranslation } from '@/lib/i18n'
 
 type GenerateArticleButtonProps = {
   analysis: {
@@ -14,6 +15,7 @@ type GenerateArticleButtonProps = {
 }
 
 export function GenerateArticleButton({ analysis }: GenerateArticleButtonProps) {
+  const { t } = useTranslation()
   const [isGenerating, setIsGenerating] = useState(false)
   const [isPublishing, setIsPublishing] = useState(false)
   const [generatedArticle, setGeneratedArticle] = useState<string | null>(null)
@@ -21,7 +23,7 @@ export function GenerateArticleButton({ analysis }: GenerateArticleButtonProps) 
 
   const handleGenerate = async () => {
     setIsGenerating(true)
-    toast.info('AI is writing your article...', { description: 'This may take 10-15 seconds.' })
+    toast.info(t('dashboard.actions.generateArticle'), { description: t('dashboard.generatingDesc') })
 
     try {
       const response = await fetch('/api/generate-article', {
@@ -40,12 +42,12 @@ export function GenerateArticleButton({ analysis }: GenerateArticleButtonProps) 
       if (response.ok) {
         setGeneratedArticle(data.article)
         setShowPreview(true)
-        toast.success('Article generated successfully!', { description: 'Review it before publishing.' })
+        toast.success(t('dashboard.generated'), { description: t('dashboard.reviewBeforePublish') })
       } else {
-        toast.error('Generation failed', { description: data.error })
+        toast.error(t('dashboard.publishFailed'), { description: data.error })
       }
     } catch (error) {
-      toast.error('An error occurred', { description: 'Failed to connect to AI service.' })
+      toast.error(t('dashboard.publishFailed'), { description: t('dashboard.checkConnection') })
     } finally {
       setIsGenerating(false)
     }
@@ -67,16 +69,16 @@ export function GenerateArticleButton({ analysis }: GenerateArticleButtonProps) 
       const data = await response.json()
 
       if (response.ok) {
-        toast.success('Published to WordPress!', {
-          description: 'Your full article is now live.',
-          action: { label: 'View', onClick: () => window.open(data.postUrl, '_blank') },
+        toast.success(t('dashboard.published'), {
+          description: t('dashboard.publishedDesc'),
+          action: { label: t('dashboard.view'), onClick: () => window.open(data.postUrl, '_blank') },
         })
-        setShowPreview(false) // إغلاق المعاينة بعد النشر
+        setShowPreview(false)
       } else {
-        toast.error('Publishing failed', { description: data.error })
+        toast.error(t('dashboard.publishFailed'), { description: data.error })
       }
     } catch (error) {
-      toast.error('An error occurred', { description: 'Failed to publish to WordPress.' })
+      toast.error(t('dashboard.publishFailed'), { description: t('dashboard.checkConnection') })
     } finally {
       setIsPublishing(false)
     }
@@ -92,25 +94,22 @@ export function GenerateArticleButton({ analysis }: GenerateArticleButtonProps) 
         {isGenerating ? (
           <>
             <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-            AI is Writing...
+            {t('dashboard.generating')}
           </>
         ) : (
           <>
             <FileText className="h-4 w-4" />
-            Generate Full Article
+            {t('dashboard.actions.generateArticle')}
           </>
         )}
       </button>
 
-      {/* نافذة المعاينة (Modal) */}
       {showPreview && generatedArticle && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
           <div className="relative w-full max-w-3xl max-h-[85vh] overflow-hidden rounded-2xl bg-card border border-border shadow-2xl flex flex-col">
-            
-            {/* Modal Header */}
             <div className="flex items-center justify-between border-b border-border p-4 bg-background/50">
               <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
-                <Eye className="h-5 w-5 text-teal" /> Article Preview
+                <Eye className="h-5 w-5 text-teal" /> {t('dashboard.articlePreview')}
               </h3>
               <button 
                 onClick={() => setShowPreview(false)}
@@ -120,7 +119,6 @@ export function GenerateArticleButton({ analysis }: GenerateArticleButtonProps) 
               </button>
             </div>
 
-            {/* Modal Content (Scrollable) */}
             <div className="flex-1 overflow-y-auto p-6 bg-background">
               <div 
                 className="prose prose-sm max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-teal"
@@ -128,13 +126,12 @@ export function GenerateArticleButton({ analysis }: GenerateArticleButtonProps) 
               />
             </div>
 
-            {/* Modal Footer */}
             <div className="border-t border-border p-4 bg-background/50 flex justify-end gap-3">
               <button
                 onClick={() => setShowPreview(false)}
                 className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
-                Cancel
+                {t('dashboard.cancel')}
               </button>
               <button
                 onClick={handlePublish}
@@ -144,17 +141,16 @@ export function GenerateArticleButton({ analysis }: GenerateArticleButtonProps) 
                 {isPublishing ? (
                   <>
                     <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                    Publishing...
+                    {t('dashboard.publishing')}
                   </>
                 ) : (
                   <>
                     <Send className="h-4 w-4" />
-                    Publish to WordPress
+                    {t('dashboard.actions.publishToWordPress')}
                   </>
                 )}
               </button>
             </div>
-
           </div>
         </div>
       )}

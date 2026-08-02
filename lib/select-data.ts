@@ -1,637 +1,325 @@
-// بيانات الـ Niches (المجالات التجارية) - نسخة شاملة وعالمية
+// بيانات الـ Niches (المجالات التجارية) - نسخة شاملة وعالمية مع دعم العربية
 export const nicheGroups = [
   {
     label: "Medical & Healthcare",
+    labelAr: "الرعاية الصحية والطبية",
     options: [
-      { value: "General Hospital", label: "General Hospital" },
-      { value: "Specialized Medical Clinic (Cardiology, Dermatology, etc.)", label: "Specialized Medical Clinic" },
-      { value: "Dental Clinic & Orthodontics", label: "Dental Clinic & Orthodontics" },
-      { value: "Medical Laboratory & Diagnostics", label: "Medical Laboratory & Diagnostics" },
-      { value: "Pharmacy & Drugstore", label: "Pharmacy & Drugstore" },
-      { value: "Physiotherapy & Rehabilitation Center", label: "Physiotherapy & Rehabilitation Center" },
-      { value: "Mental Health & Psychology Clinic", label: "Mental Health & Psychology Clinic" },
-      { value: "Veterinary Clinic & Animal Hospital", label: "Veterinary Clinic & Animal Hospital" },
-      { value: "Veterinary Pharmacy & Medicine Warehouse", label: "Veterinary Pharmacy & Medicine Warehouse" },
-      { value: "Veterinary Pharmaceutical Factory", label: "Veterinary Pharmaceutical Factory" },
-      { value: "Nursing Home & Elderly Care", label: "Nursing Home & Elderly Care" },
-      { value: "Ambulance & Emergency Medical Services", label: "Ambulance & Emergency Medical Services" },
-      { value: "Medical Equipment Supplier", label: "Medical Equipment Supplier" }
+      { value: "General Hospital", label: "General Hospital", labelAr: "مستشفى عام" },
+      { value: "Specialized Medical Clinic", label: "Specialized Medical Clinic", labelAr: "عيادة طبية متخصصة" },
+      { value: "Dental Clinic & Orthodontics", label: "Dental Clinic & Orthodontics", labelAr: "عيادة أسنان وتقويم" },
+      { value: "Medical Laboratory & Diagnostics", label: "Medical Laboratory & Diagnostics", labelAr: "مختبر وتشخيص طبي" },
+      { value: "Pharmacy & Drugstore", label: "Pharmacy & Drugstore", labelAr: "صيدلية" },
+      { value: "Physiotherapy & Rehabilitation Center", label: "Physiotherapy & Rehabilitation Center", labelAr: "مركز علاج طبيعي وتأهيل" },
+      { value: "Mental Health & Psychology Clinic", label: "Mental Health & Psychology Clinic", labelAr: "عيادة صحة نفسية" },
+      { value: "Veterinary Clinic & Animal Hospital", label: "Veterinary Clinic & Animal Hospital", labelAr: "عيادة بيطرية" },
+      { value: "Veterinary Pharmacy & Medicine Warehouse", label: "Veterinary Pharmacy & Medicine Warehouse", labelAr: "مستودع أدوية بيطرية" },
+      { value: "Veterinary Pharmaceutical Factory", label: "Veterinary Pharmaceutical Factory", labelAr: "مصنع أدوية بيطرية" },
+      { value: "Nursing Home & Elderly Care", label: "Nursing Home & Elderly Care", labelAr: "دار رعاية مسنين" },
+      { value: "Ambulance & Emergency Medical Services", label: "Ambulance & Emergency Medical Services", labelAr: "خدمات إسعاف وطوارئ" },
+      { value: "Medical Equipment Supplier", label: "Medical Equipment Supplier", labelAr: "مورد معدات طبية" }
     ]
   },
   {
     label: "Industrial & Manufacturing",
+    labelAr: "الصناعة والتصنيع",
     options: [
-      { value: "General Manufacturing & Factory", label: "General Manufacturing & Factory" },
-      { value: "Food & Beverage Processing Plant", label: "Food & Beverage Processing Plant" },
-      { value: "Textile & Garment Manufacturing", label: "Textile & Garment Manufacturing" },
-      { value: "Chemical & Pharmaceutical Manufacturing", label: "Chemical & Pharmaceutical Manufacturing" },
-      { value: "Metal, Steel & Aluminum Fabrication", label: "Metal, Steel & Aluminum Fabrication" },
-      { value: "Plastic & Rubber Manufacturing", label: "Plastic & Rubber Manufacturing" },
-      { value: "Wood, Furniture & Paper Manufacturing", label: "Wood, Furniture & Paper Manufacturing" },
-      { value: "Electronics & Appliance Manufacturing", label: "Electronics & Appliance Manufacturing" },
-      { value: "Packaging & Printing Services", label: "Packaging & Printing Services" }
+      { value: "General Manufacturing & Factory", label: "General Manufacturing & Factory", labelAr: "مصنع وتصنيع عام" },
+      { value: "Food & Beverage Processing Plant", label: "Food & Beverage Processing Plant", labelAr: "مصنع أغذية ومشروبات" },
+      { value: "Textile & Garment Manufacturing", label: "Textile & Garment Manufacturing", labelAr: "تصنيع منسوجات وملابس" },
+      { value: "Chemical & Pharmaceutical Manufacturing", label: "Chemical & Pharmaceutical Manufacturing", labelAr: "تصنيع مواد كيميائية وأدوية" },
+      { value: "Metal, Steel & Aluminum Fabrication", label: "Metal, Steel & Aluminum Fabrication", labelAr: "تصنيع معادن وصلب وألمنيوم" },
+      { value: "Plastic & Rubber Manufacturing", label: "Plastic & Rubber Manufacturing", labelAr: "تصنيع بلاستيك ومطاط" },
+      { value: "Wood, Furniture & Paper Manufacturing", label: "Wood, Furniture & Paper Manufacturing", labelAr: "تصنيع أخشاب وأثاث وورق" },
+      { value: "Electronics & Appliance Manufacturing", label: "Electronics & Appliance Manufacturing", labelAr: "تصنيع إلكترونيات وأجهزة" },
+      { value: "Packaging & Printing Services", label: "Packaging & Printing Services", labelAr: "خدمات تغليف وطباعة" }
     ]
   },
   {
     label: "Construction & Real Estate",
+    labelAr: "البناء والعقارات",
     options: [
-      { value: "Real Estate Development", label: "Real Estate Development" },
-      { value: "Property Management Company", label: "Property Management Company" },
-      { value: "General Construction Contractor", label: "General Construction Contractor" },
-      { value: "Architecture & Engineering Firm", label: "Architecture & Engineering Firm" },
-      { value: "Interior Design & Fit-out", label: "Interior Design & Fit-out" },
-      { value: "Building Materials Supplier", label: "Building Materials Supplier" },
-      { value: "Heavy Equipment Rental & Sales", label: "Heavy Equipment Rental & Sales" },
-      { value: "Landscaping & Hardscaping", label: "Landscaping & Hardscaping" }
+      { value: "Real Estate Development", label: "Real Estate Development", labelAr: "تطوير عقاري" },
+      { value: "Property Management Company", label: "Property Management Company", labelAr: "شركة إدارة عقارات" },
+      { value: "General Construction Contractor", label: "General Construction Contractor", labelAr: "مقاول بناء عام" },
+      { value: "Architecture & Engineering Firm", label: "Architecture & Engineering Firm", labelAr: "مكتب هندسة وعمارة" },
+      { value: "Interior Design & Fit-out", label: "Interior Design & Fit-out", labelAr: "تصميم داخلي وتجهيز" },
+      { value: "Building Materials Supplier", label: "Building Materials Supplier", labelAr: "مورد مواد بناء" },
+      { value: "Heavy Equipment Rental & Sales", label: "Heavy Equipment Rental & Sales", labelAr: "تأجير وبيع معدات ثقيلة" },
+      { value: "Landscaping & Hardscaping", label: "Landscaping & Hardscaping", labelAr: "تنسيق حدائق ومناظر طبيعية" }
     ]
   },
   {
     label: "Logistics, Transport & Supply Chain",
+    labelAr: "اللوجستيات والنقل وسلاسل الإمداد",
     options: [
-      { value: "Freight Forwarding & Shipping", label: "Freight Forwarding & Shipping" },
-      { value: "Courier, Parcel & Last-Mile Delivery", label: "Courier, Parcel & Last-Mile Delivery" },
-      { value: "Warehousing & Distribution Center", label: "Warehousing & Distribution Center" },
-      { value: "Maritime & Port Services", label: "Maritime & Port Services" },
-      { value: "Trucking, Haulage & Freight", label: "Trucking, Haulage & Freight" },
-      { value: "Public Transportation & Taxi Services", label: "Public Transportation & Taxi Services" },
-      { value: "Aviation & Airport Services", label: "Aviation & Airport Services" }
+      { value: "Freight Forwarding & Shipping", label: "Freight Forwarding & Shipping", labelAr: "شحن ونقل بضائع" },
+      { value: "Courier, Parcel & Last-Mile Delivery", label: "Courier, Parcel & Last-Mile Delivery", labelAr: "خدمات توصيل وطرود" },
+      { value: "Warehousing & Distribution Center", label: "Warehousing & Distribution Center", labelAr: "مستودعات ومراكز توزيع" },
+      { value: "Maritime & Port Services", label: "Maritime & Port Services", labelAr: "خدمات بحرية وموانئ" },
+      { value: "Trucking, Haulage & Freight", label: "Trucking, Haulage & Freight", labelAr: "نقل بالشاحنات والبضائع" },
+      { value: "Public Transportation & Taxi Services", label: "Public Transportation & Taxi Services", labelAr: "مواصلات عامة وتاكسي" },
+      { value: "Aviation & Airport Services", label: "Aviation & Airport Services", labelAr: "خدمات طيران ومطارات" }
     ]
   },
   {
     label: "Technology & Software",
+    labelAr: "التكنولوجيا والبرمجيات",
     options: [
-      { value: "Software as a Service (SaaS) Company", label: "Software as a Service (SaaS) Company" },
-      { value: "Mobile App Development", label: "Mobile App Development" },
-      { value: "Web Design & Development Agency", label: "Web Design & Development Agency" },
-      { value: "Cybersecurity & IT Consulting", label: "Cybersecurity & IT Consulting" },
-      { value: "Cloud Services & Data Center", label: "Cloud Services & Data Center" },
-      { value: "IT Hardware & Networking", label: "IT Hardware & Networking" },
-      { value: "AI & Machine Learning Solutions", label: "AI & Machine Learning Solutions" },
-      { value: "E-commerce Platform & Marketplace", label: "E-commerce Platform & Marketplace" }
+      { value: "Software as a Service (SaaS) Company", label: "Software as a Service (SaaS) Company", labelAr: "شركة برمجيات كخدمة (SaaS)" },
+      { value: "Mobile App Development", label: "Mobile App Development", labelAr: "تطوير تطبيقات جوال" },
+      { value: "Web Design & Development Agency", label: "Web Design & Development Agency", labelAr: "وكالة تصميم وتطوير ويب" },
+      { value: "Cybersecurity & IT Consulting", label: "Cybersecurity & IT Consulting", labelAr: "أمن سيبراني واستشارات تقنية" },
+      { value: "Cloud Services & Data Center", label: "Cloud Services & Data Center", labelAr: "خدمات سحابية ومراكز بيانات" },
+      { value: "IT Hardware & Networking", label: "IT Hardware & Networking", labelAr: "أجهزة شبكات وتقنية معلومات" },
+      { value: "AI & Machine Learning Solutions", label: "AI & Machine Learning Solutions", labelAr: "حلول ذكاء اصطناعي وتعلم آلي" },
+      { value: "E-commerce Platform & Marketplace", label: "E-commerce Platform & Marketplace", labelAr: "منصات تجارة إلكترونية" }
     ]
   },
   {
     label: "Agriculture, Farming & Environment",
+    labelAr: "الزراعة والبيئة",
     options: [
-      { value: "Farming & Crop Production", label: "Farming & Crop Production" },
-      { value: "Livestock & Poultry Farming", label: "Livestock & Poultry Farming" },
-      { value: "Fisheries & Aquaculture", label: "Fisheries & Aquaculture" },
-      { value: "Agricultural Equipment & Supplies", label: "Agricultural Equipment & Supplies" },
-      { value: "Waste Management & Recycling", label: "Waste Management & Recycling" },
-      { value: "Environmental Consulting & Services", label: "Environmental Consulting & Services" }
+      { value: "Farming & Crop Production", label: "Farming & Crop Production", labelAr: "زراعة وإنتاج محاصيل" },
+      { value: "Livestock & Poultry Farming", label: "Livestock & Poultry Farming", labelAr: "تربية ماشية ودواجن" },
+      { value: "Fisheries & Aquaculture", label: "Fisheries & Aquaculture", labelAr: "مصايد وتربية مائية" },
+      { value: "Agricultural Equipment & Supplies", label: "Agricultural Equipment & Supplies", labelAr: "معدات ومستلزمات زراعية" },
+      { value: "Waste Management & Recycling", label: "Waste Management & Recycling", labelAr: "إدارة نفايات وإعادة تدوير" },
+      { value: "Environmental Consulting & Services", label: "Environmental Consulting & Services", labelAr: "استشارات وخدمات بيئية" }
     ]
   },
   {
     label: "Energy, Utilities & Mining",
+    labelAr: "الطاقة والمرافق والتعدين",
     options: [
-      { value: "Renewable Energy (Solar, Wind, etc.)", label: "Renewable Energy (Solar, Wind, etc.)" },
-      { value: "Oil, Gas & Petroleum Services", label: "Oil, Gas & Petroleum Services" },
-      { value: "Electrical Utility & Grid Services", label: "Electrical Utility & Grid Services" },
-      { value: "Water Treatment & Desalination", label: "Water Treatment & Desalination" },
-      { value: "Mining & Quarrying", label: "Mining & Quarrying" }
+      { value: "Renewable Energy (Solar, Wind, etc.)", label: "Renewable Energy (Solar, Wind, etc.)", labelAr: "طاقة متجددة (شمسية، رياح)" },
+      { value: "Oil, Gas & Petroleum Services", label: "Oil, Gas & Petroleum Services", labelAr: "خدمات نفط وغاز وبترول" },
+      { value: "Electrical Utility & Grid Services", label: "Electrical Utility & Grid Services", labelAr: "خدمات مرافق وشبكات كهرباء" },
+      { value: "Water Treatment & Desalination", label: "Water Treatment & Desalination", labelAr: "معالجة وتحلية مياه" },
+      { value: "Mining & Quarrying", label: "Mining & Quarrying", labelAr: "تعدين ومحاجر" }
     ]
   },
   {
     label: "Financial, Legal & Corporate Services",
+    labelAr: "الخدمات المالية والقانونية والمؤسسية",
     options: [
-      { value: "Banking & Financial Institutions", label: "Banking & Financial Institutions" },
-      { value: "Accounting, Auditing & Bookkeeping", label: "Accounting, Auditing & Bookkeeping" },
-      { value: "Tax Consulting & Advisory", label: "Tax Consulting & Advisory" },
-      { value: "Insurance Broker & Agency", label: "Insurance Broker & Agency" },
-      { value: "Law Firm & Legal Services", label: "Law Firm & Legal Services" },
-      { value: "Company Formation & Business Setup", label: "Company Formation & Business Setup" },
-      { value: "PRO & Government Liaison Services", label: "PRO & Government Liaison Services" },
-      { value: "HR, Recruitment & Staffing", label: "HR, Recruitment & Staffing" },
-      { value: "Management & Business Consulting", label: "Management & Business Consulting" },
-      { value: "Translation & Interpretation Services", label: "Translation & Interpretation Services" }
+      { value: "Banking & Financial Institutions", label: "Banking & Financial Institutions", labelAr: "بنوك ومؤسسات مالية" },
+      { value: "Accounting, Auditing & Bookkeeping", label: "Accounting, Auditing & Bookkeeping", labelAr: "محاسبة ومراجعة ومسك دفاتر" },
+      { value: "Tax Consulting & Advisory", label: "Tax Consulting & Advisory", labelAr: "استشارات وضرائب" },
+      { value: "Insurance Broker & Agency", label: "Insurance Broker & Agency", labelAr: "سمسار ووكالة تأمين" },
+      { value: "Law Firm & Legal Services", label: "Law Firm & Legal Services", labelAr: "مكتب محاماة وخدمات قانونية" },
+      { value: "Company Formation & Business Setup", label: "Company Formation & Business Setup", labelAr: "تأسيس شركات وإعداد أعمال" },
+      { value: "PRO & Government Liaison Services", label: "PRO & Government Liaison Services", labelAr: "خدمات مندوب حكومي (PRO)" },
+      { value: "HR, Recruitment & Staffing", label: "HR, Recruitment & Staffing", labelAr: "موارد بشرية وتوظيف" },
+      { value: "Management & Business Consulting", label: "Management & Business Consulting", labelAr: "استشارات إدارية وأعمال" },
+      { value: "Translation & Interpretation Services", label: "Translation & Interpretation Services", labelAr: "خدمات ترجمة وفورية" }
     ]
   },
   {
     label: "Digital Marketing, Media & PR",
+    labelAr: "التسويق الرقمي والإعلام والعلاقات العامة",
     options: [
-      { value: "Digital Marketing & SEO Agency", label: "Digital Marketing & SEO Agency" },
-      { value: "Social Media Management", label: "Social Media Management" },
-      { value: "Public Relations (PR) & Communications", label: "Public Relations (PR) & Communications" },
-      { value: "Advertising & Media Buying", label: "Advertising & Media Buying" },
-      { value: "Photography & Videography Production", label: "Photography & Videography Production" },
-      { value: "Film, TV & Video Production", label: "Film, TV & Video Production" }
+      { value: "Digital Marketing & SEO Agency", label: "Digital Marketing & SEO Agency", labelAr: "وكالة تسويق رقمي و SEO" },
+      { value: "Social Media Management", label: "Social Media Management", labelAr: "إدارة وسائل التواصل الاجتماعي" },
+      { value: "Public Relations (PR) & Communications", label: "Public Relations (PR) & Communications", labelAr: "علاقات عامة واتصالات" },
+      { value: "Advertising & Media Buying", label: "Advertising & Media Buying", labelAr: "إعلانات وشراء وسائل إعلام" },
+      { value: "Photography & Videography Production", label: "Photography & Videography Production", labelAr: "إنتاج تصوير فوتوغرافي وفيديو" },
+      { value: "Film, TV & Video Production", label: "Film, TV & Video Production", labelAr: "إنتاج أفلام وتلفزيون وفيديو" }
     ]
   },
   {
     label: "Retail & Wholesale Trade",
+    labelAr: "تجارة التجزئة والجملة",
     options: [
-      { value: "Supermarket & Grocery Store", label: "Supermarket & Grocery Store" },
-      { value: "Clothing, Apparel & Fashion Retail", label: "Clothing, Apparel & Fashion Retail" },
-      { value: "Electronics & Home Appliances", label: "Electronics & Home Appliances" },
-      { value: "Furniture & Home Decor", label: "Furniture & Home Decor" },
-      { value: "Jewelry, Watches & Accessories", label: "Jewelry, Watches & Accessories" },
-      { value: "Sports & Outdoor Equipment", label: "Sports & Outdoor Equipment" },
-      { value: "Automotive Parts & Accessories", label: "Automotive Parts & Accessories" },
-      { value: "Wholesale & Distribution", label: "Wholesale & Distribution" }
+      { value: "Supermarket & Grocery Store", label: "Supermarket & Grocery Store", labelAr: "سوبر ماركت وبقالة" },
+      { value: "Clothing, Apparel & Fashion Retail", label: "Clothing, Apparel & Fashion Retail", labelAr: "تجارة ملابس وأزياء" },
+      { value: "Electronics & Home Appliances", label: "Electronics & Home Appliances", labelAr: "إلكترونيات وأجهزة منزلية" },
+      { value: "Furniture & Home Decor", label: "Furniture & Home Decor", labelAr: "أثاث وديكور منزلي" },
+      { value: "Jewelry, Watches & Accessories", label: "Jewelry, Watches & Accessories", labelAr: "مجوهرات وساعات وإكسسوارات" },
+      { value: "Sports & Outdoor Equipment", label: "Sports & Outdoor Equipment", labelAr: "معدات رياضية وخارجية" },
+      { value: "Automotive Parts & Accessories", label: "Automotive Parts & Accessories", labelAr: "قطع غيار وإكسسوارات سيارات" },
+      { value: "Wholesale & Distribution", label: "Wholesale & Distribution", labelAr: "تجارة جملة وتوزيع" }
     ]
   },
   {
     label: "Food, Beverage & Hospitality",
+    labelAr: "الطعام والشراب والضيافة",
     options: [
-      { value: "Restaurant & Fine Dining", label: "Restaurant & Fine Dining" },
-      { value: "Fast Food & Quick Service Restaurant (QSR)", label: "Fast Food & Quick Service Restaurant (QSR)" },
-      { value: "Café, Coffee Shop & Bakery", label: "Café, Coffee Shop & Bakery" },
-      { value: "Catering & Event Food Services", label: "Catering & Event Food Services" },
-      { value: "Food Truck & Street Food", label: "Food Truck & Street Food" },
-      { value: "Bar, Pub & Nightclub", label: "Bar, Pub & Nightclub" },
-      { value: "Hotel, Resort & Accommodation", label: "Hotel, Resort & Accommodation" },
-      { value: "Bed & Breakfast / Guesthouse", label: "Bed & Breakfast / Guesthouse" }
+      { value: "Restaurant & Fine Dining", label: "Restaurant & Fine Dining", labelAr: "مطعم ومأكولات راقية" },
+      { value: "Fast Food & Quick Service Restaurant (QSR)", label: "Fast Food & Quick Service Restaurant (QSR)", labelAr: "وجبات سريعة" },
+      { value: "Café, Coffee Shop & Bakery", label: "Café, Coffee Shop & Bakery", labelAr: "مقهى ومخبز" },
+      { value: "Catering & Event Food Services", label: "Catering & Event Food Services", labelAr: "تموين وخدمات طعام مناسبات" },
+      { value: "Food Truck & Street Food", label: "Food Truck & Street Food", labelAr: "شاحنة طعام وطعام شارع" },
+      { value: "Bar, Pub & Nightclub", label: "Bar, Pub & Nightclub", labelAr: "حانة ونادي ليلي" },
+      { value: "Hotel, Resort & Accommodation", label: "Hotel, Resort & Accommodation", labelAr: "فندق ومنتجع وإقامة" },
+      { value: "Bed & Breakfast / Guesthouse", label: "Bed & Breakfast / Guesthouse", labelAr: "مبيت وإفطار / دار ضيافة" }
     ]
   },
   {
     label: "Automotive & Mobility",
+    labelAr: "السيارات والتنقل",
     options: [
-      { value: "Car Dealership (New & Used)", label: "Car Dealership (New & Used)" },
-      { value: "Auto Repair, Garage & Maintenance", label: "Auto Repair, Garage & Maintenance" },
-      { value: "Car Wash, Detailing & Coating", label: "Car Wash, Detailing & Coating" },
-      { value: "Car Rental & Leasing", label: "Car Rental & Leasing" },
-      { value: "Tire Shop & Battery Services", label: "Tire Shop & Battery Services" },
-      { value: "Towing & Roadside Assistance", label: "Towing & Roadside Assistance" },
-      { value: "Driving School", label: "Driving School" }
+      { value: "Car Dealership (New & Used)", label: "Car Dealership (New & Used)", labelAr: "معرض سيارات (جديد ومستعمل)" },
+      { value: "Auto Repair, Garage & Maintenance", label: "Auto Repair, Garage & Maintenance", labelAr: "ورشة إصلاح وصيانة سيارات" },
+      { value: "Car Wash, Detailing & Coating", label: "Car Wash, Detailing & Coating", labelAr: "غسيل وتلميع سيارات" },
+      { value: "Car Rental & Leasing", label: "Car Rental & Leasing", labelAr: "تأجير سيارات" },
+      { value: "Tire Shop & Battery Services", label: "Tire Shop & Battery Services", labelAr: "متجر إطارات وخدمات بطاريات" },
+      { value: "Towing & Roadside Assistance", label: "Towing & Roadside Assistance", labelAr: "سحب ومساعدة على الطريق" },
+      { value: "Driving School", label: "Driving School", labelAr: "مدرسة تعليم قيادة" }
     ]
   },
   {
     label: "Home, Property & Facility Services",
+    labelAr: "خدمات المنازل والمرافق",
     options: [
-      { value: "Plumbing Services", label: "Plumbing Services" },
-      { value: "Electrical Services & Wiring", label: "Electrical Services & Wiring" },
-      { value: "HVAC & Air Conditioning Services", label: "HVAC & Air Conditioning Services" },
-      { value: "Cleaning & Janitorial Services", label: "Cleaning & Janitorial Services" },
-      { value: "Laundry, Dry Cleaning & Online Laundry App", label: "Laundry, Dry Cleaning & Online Laundry App" },
-      { value: "Pest Control Services", label: "Pest Control Services" },
-      { value: "Moving, Packing & Relocation", label: "Moving, Packing & Relocation" },
-      { value: "Home Renovation & Remodeling", label: "Home Renovation & Remodeling" },
-      { value: "Security & Guard Services", label: "Security & Guard Services" }
+      { value: "Plumbing Services", label: "Plumbing Services", labelAr: "خدمات سباكة" },
+      { value: "Electrical Services & Wiring", label: "Electrical Services & Wiring", labelAr: "خدمات كهرباء وتمديدات" },
+      { value: "HVAC & Air Conditioning Services", label: "HVAC & Air Conditioning Services", labelAr: "خدمات تكييف وتبريد" },
+      { value: "Cleaning & Janitorial Services", label: "Cleaning & Janitorial Services", labelAr: "خدمات تنظيف" },
+      { value: "Laundry, Dry Cleaning & Online Laundry App", label: "Laundry, Dry Cleaning & Online Laundry App", labelAr: "غسيل وكوي وتطبيق غسيل أونلاين" },
+      { value: "Pest Control Services", label: "Pest Control Services", labelAr: "خدمات مكافحة حشرات" },
+      { value: "Moving, Packing & Relocation", label: "Moving, Packing & Relocation", labelAr: "نقل أثاث وتغليف" },
+      { value: "Home Renovation & Remodeling", label: "Home Renovation & Remodeling", labelAr: "تجديد وترميم منازل" },
+      { value: "Security & Guard Services", label: "Security & Guard Services", labelAr: "خدمات حراسة وأمن" }
     ]
   },
   {
     label: "Education & Training",
+    labelAr: "التعليم والتدريب",
     options: [
-      { value: "K-12 School & Academy", label: "K-12 School & Academy" },
-      { value: "University, College & Higher Education", label: "University, College & Higher Education" },
-      { value: "Vocational & Technical Training Center", label: "Vocational & Technical Training Center" },
-      { value: "Language School & Institute", label: "Language School & Institute" },
-      { value: "Tutoring & Test Preparation", label: "Tutoring & Test Preparation" },
-      { value: "Online Education & E-Learning Platform", label: "Online Education & E-Learning Platform" },
-      { value: "Nursery, Daycare & Childcare", label: "Nursery, Daycare & Childcare" },
-      { value: "Sports Academy & Martial Arts", label: "Sports Academy & Martial Arts" }
+      { value: "K-12 School & Academy", label: "K-12 School & Academy", labelAr: "مدرسة وأكاديمية" },
+      { value: "University, College & Higher Education", label: "University, College & Higher Education", labelAr: "جامعة وتعليم عالي" },
+      { value: "Vocational & Technical Training Center", label: "Vocational & Technical Training Center", labelAr: "مركز تدريب فني ومهني" },
+      { value: "Language School & Institute", label: "Language School & Institute", labelAr: "معهد ومدرسة لغات" },
+      { value: "Tutoring & Test Preparation", label: "Tutoring & Test Preparation", labelAr: "دروس خصوصية وتحضير اختبارات" },
+      { value: "Online Education & E-Learning Platform", label: "Online Education & E-Learning Platform", labelAr: "تعليم أونلاين ومنصة تعلم إلكتروني" },
+      { value: "Nursery, Daycare & Childcare", label: "Nursery, Daycare & Childcare", labelAr: "حضانة ورعاية أطفال" },
+      { value: "Sports Academy & Martial Arts", label: "Sports Academy & Martial Arts", labelAr: "أكاديمية رياضية وفنون قتالية" }
     ]
   },
   {
     label: "Health, Wellness & Beauty",
+    labelAr: "الصحة واللياقة والجمال",
     options: [
-      { value: "Gym, Fitness Center & CrossFit", label: "Gym, Fitness Center & CrossFit" },
-      { value: "Yoga, Pilates & Wellness Studio", label: "Yoga, Pilates & Wellness Studio" },
-      { value: "Beauty Salon, Barbershop & Spa", label: "Beauty Salon, Barbershop & Spa" },
-      { value: "Cosmetic Surgery & Aesthetic Clinic", label: "Cosmetic Surgery & Aesthetic Clinic" },
-      { value: "Pet Grooming, Boarding & Supplies", label: "Pet Grooming, Boarding & Supplies" }
+      { value: "Gym, Fitness Center & CrossFit", label: "Gym, Fitness Center & CrossFit", labelAr: "صالة ألعاب ولياقة بدنية" },
+      { value: "Yoga, Pilates & Wellness Studio", label: "Yoga, Pilates & Wellness Studio", labelAr: "استوديو يوجا وبيلاتس وعافية" },
+      { value: "Beauty Salon, Barbershop & Spa", label: "Beauty Salon, Barbershop & Spa", labelAr: "صالون تجميل وحلاقة وسبا" },
+      { value: "Cosmetic Surgery & Aesthetic Clinic", label: "Cosmetic Surgery & Aesthetic Clinic", labelAr: "عيادة جراحة تجميل وعلاج جمالي" },
+      { value: "Pet Grooming, Boarding & Supplies", label: "Pet Grooming, Boarding & Supplies", labelAr: "العناية بالحيوانات الأليفة وإيواء" }
     ]
   },
   {
     label: "Travel, Tourism & Leisure",
+    labelAr: "السفر والسياحة والترفيه",
     options: [
-      { value: "Travel Agency & Tour Operator", label: "Travel Agency & Tour Operator" },
-      { value: "Airline & Aviation Services", label: "Airline & Aviation Services" },
-      { value: "Cruise Line & Yacht Rental", label: "Cruise Line & Yacht Rental" },
-      { value: "Theme Park & Amusement Center", label: "Theme Park & Amusement Center" },
-      { value: "Museum, Gallery & Cultural Site", label: "Museum, Gallery & Cultural Site" }
+      { value: "Travel Agency & Tour Operator", label: "Travel Agency & Tour Operator", labelAr: "وكالة سفر ومنظم رحلات" },
+      { value: "Airline & Aviation Services", label: "Airline & Aviation Services", labelAr: "خطوط جوية وخدمات طيران" },
+      { value: "Cruise Line & Yacht Rental", label: "Cruise Line & Yacht Rental", labelAr: "رحلات بحرية وتأجير يخوت" },
+      { value: "Theme Park & Amusement Center", label: "Theme Park & Amusement Center", labelAr: "مدينة ملاهي ومركز ترفيهي" },
+      { value: "Museum, Gallery & Cultural Site", label: "Museum, Gallery & Cultural Site", labelAr: "متحف ومعرض وموقع ثقافي" }
     ]
   },
   {
     label: "Events, Entertainment & Arts",
+    labelAr: "الفعاليات والترفيه والفنون",
     options: [
-      { value: "Event Management & Planning", label: "Event Management & Planning" },
-      { value: "Wedding Planner & Bridal Services", label: "Wedding Planner & Bridal Services" },
-      { value: "Music Studio, Label & Production", label: "Music Studio, Label & Production" },
-      { value: "Theater, Performing Arts & Cinema", label: "Theater, Performing Arts & Cinema" },
-      { value: "Gaming, Esports & Entertainment Venue", label: "Gaming, Esports & Entertainment Venue" }
+      { value: "Event Management & Planning", label: "Event Management & Planning", labelAr: "إدارة وتخطيط فعاليات" },
+      { value: "Wedding Planner & Bridal Services", label: "Wedding Planner & Bridal Services", labelAr: "منظم حفلات زفاف وخدمات عرائس" },
+      { value: "Music Studio, Label & Production", label: "Music Studio, Label & Production", labelAr: "استوديو موسيقى وإنتاج" },
+      { value: "Theater, Performing Arts & Cinema", label: "Theater, Performing Arts & Cinema", labelAr: "مسرح وفنون أدائية وسينما" },
+      { value: "Gaming, Esports & Entertainment Venue", label: "Gaming, Esports & Entertainment Venue", labelAr: "ألعاب إلكترونية ومكان ترفيهي" }
     ]
   },
   {
     label: "Non-Profit, Government & Community",
+    labelAr: "المنظمات غير الربحية والحكومية والمجتمعية",
     options: [
-      { value: "Non-Governmental Organization (NGO)", label: "Non-Governmental Organization (NGO)" },
-      { value: "Charity & Foundation", label: "Charity & Foundation" },
-      { value: "Religious Center & Place of Worship", label: "Religious Center & Place of Worship" },
-      { value: "Government & Municipal Services", label: "Government & Municipal Services" },
-      { value: "Trade Union & Professional Association", label: "Trade Union & Professional Association" }
+      { value: "Non-Governmental Organization (NGO)", label: "Non-Governmental Organization (NGO)", labelAr: "منظمة غير حكومية" },
+      { value: "Charity & Foundation", label: "Charity & Foundation", labelAr: "جمعية خيرية ومؤسسة" },
+      { value: "Religious Center & Place of Worship", label: "Religious Center & Place of Worship", labelAr: "مركز ديني ومكان عبادة" },
+      { value: "Government & Municipal Services", label: "Government & Municipal Services", labelAr: "خدمات حكومية وبلدية" },
+      { value: "Trade Union & Professional Association", label: "Trade Union & Professional Association", labelAr: "نقابة عمالية وجمعية مهنية" }
     ]
   }
 ]
 
-// بيانات الدول والمدن - كل دول العالم
+// بيانات الدول والمدن - مع دعم العربية
 export const countries = [
   { 
     value: "UAE", 
     label: "United Arab Emirates",
+    labelAr: "الإمارات العربية المتحدة",
     cities: [
-      { value: "United Arab Emirates", label: "All over UAE (Country-wide)" },
-      { value: "Al Ain, Abu Dhabi, UAE", label: "Al Ain" },
-      { value: "Dubai, UAE", label: "Dubai" },
-      { value: "Abu Dhabi City, UAE", label: "Abu Dhabi City" },
-      { value: "Sharjah, UAE", label: "Sharjah" },
-      { value: "Ajman, UAE", label: "Ajman" },
-      { value: "Ras Al Khaimah, UAE", label: "Ras Al Khaimah" },
-      { value: "Fujairah, UAE", label: "Fujairah" },
-      { value: "Umm Al Quwain, UAE", label: "Umm Al Quwain" }
+      { value: "United Arab Emirates", label: "All over UAE (Country-wide)", labelAr: "جميع أنحاء الإمارات (على مستوى الدولة)" },
+      { value: "Al Ain, Abu Dhabi, UAE", label: "Al Ain", labelAr: "العين" },
+      { value: "Dubai, UAE", label: "Dubai", labelAr: "دبي" },
+      { value: "Abu Dhabi City, UAE", label: "Abu Dhabi City", labelAr: "أبو ظبي" },
+      { value: "Sharjah, UAE", label: "Sharjah", labelAr: "الشارقة" },
+      { value: "Ajman, UAE", label: "Ajman", labelAr: "عجمان" },
+      { value: "Ras Al Khaimah, UAE", label: "Ras Al Khaimah", labelAr: "رأس الخيمة" },
+      { value: "Fujairah, UAE", label: "Fujairah", labelAr: "الفجيرة" },
+      { value: "Umm Al Quwain, UAE", label: "Umm Al Quwain", labelAr: "أم القيوين" }
     ]
   },
   { 
     value: "KSA", 
     label: "Saudi Arabia",
+    labelAr: "المملكة العربية السعودية",
     cities: [
-      { value: "Saudi Arabia", label: "All over KSA (Country-wide)" },
-      { value: "Riyadh, Saudi Arabia", label: "Riyadh" },
-      { value: "Jeddah, Saudi Arabia", label: "Jeddah" },
-      { value: "Dammam, Saudi Arabia", label: "Dammam" },
-      { value: "Khobar, Saudi Arabia", label: "Khobar" },
-      { value: "Makkah, Saudi Arabia", label: "Makkah" },
-      { value: "Madinah, Saudi Arabia", label: "Madinah" },
-      { value: "Tabuk, Saudi Arabia", label: "Tabuk" },
-      { value: "Abha, Saudi Arabia", label: "Abha" }
+      { value: "Saudi Arabia", label: "All over KSA (Country-wide)", labelAr: "جميع أنحاء المملكة (على مستوى الدولة)" },
+      { value: "Riyadh, Saudi Arabia", label: "Riyadh", labelAr: "الرياض" },
+      { value: "Jeddah, Saudi Arabia", label: "Jeddah", labelAr: "جدة" },
+      { value: "Dammam, Saudi Arabia", label: "Dammam", labelAr: "الدمام" },
+      { value: "Khobar, Saudi Arabia", label: "Khobar", labelAr: "الخبر" },
+      { value: "Makkah, Saudi Arabia", label: "Makkah", labelAr: "مكة المكرمة" },
+      { value: "Madinah, Saudi Arabia", label: "Madinah", labelAr: "المدينة المنورة" },
+      { value: "Tabuk, Saudi Arabia", label: "Tabuk", labelAr: "تبوك" },
+      { value: "Abha, Saudi Arabia", label: "Abha", labelAr: "أبها" }
     ]
   },
   { 
     value: "Egypt", 
     label: "Egypt",
+    labelAr: "مصر",
     cities: [
-      { value: "Egypt", label: "All over Egypt (Country-wide)" },
-      { value: "Cairo, Egypt", label: "Cairo" },
-      { value: "Alexandria, Egypt", label: "Alexandria" },
-      { value: "Giza, Egypt", label: "Giza" },
-      { value: "Sharm El Sheikh, Egypt", label: "Sharm El Sheikh" },
-      { value: "Hurghada, Egypt", label: "Hurghada" },
-      { value: "Luxor, Egypt", label: "Luxor" },
-      { value: "Aswan, Egypt", label: "Aswan" }
+      { value: "Egypt", label: "All over Egypt (Country-wide)", labelAr: "جميع أنحاء مصر (على مستوى الدولة)" },
+      { value: "Cairo, Egypt", label: "Cairo", labelAr: "القاهرة" },
+      { value: "Alexandria, Egypt", label: "Alexandria", labelAr: "الإسكندرية" },
+      { value: "Giza, Egypt", label: "Giza", labelAr: "الجيزة" },
+      { value: "Sharm El Sheikh, Egypt", label: "Sharm El Sheikh", labelAr: "شرم الشيخ" },
+      { value: "Hurghada, Egypt", label: "Hurghada", labelAr: "الغردقة" },
+      { value: "Luxor, Egypt", label: "Luxor", labelAr: "الأقصر" },
+      { value: "Aswan, Egypt", label: "Aswan", labelAr: "أسوان" }
     ]
   },
   { 
     value: "Kuwait", 
     label: "Kuwait",
+    labelAr: "الكويت",
     cities: [
-      { value: "Kuwait", label: "All over Kuwait (Country-wide)" },
-      { value: "Kuwait City, Kuwait", label: "Kuwait City" },
-      { value: "Hawalli, Kuwait", label: "Hawalli" },
-      { value: "Salmiya, Kuwait", label: "Salmiya" }
+      { value: "Kuwait", label: "All over Kuwait (Country-wide)", labelAr: "جميع أنحاء الكويت" },
+      { value: "Kuwait City, Kuwait", label: "Kuwait City", labelAr: "مدينة الكويت" },
+      { value: "Hawalli, Kuwait", label: "Hawalli", labelAr: "حولي" },
+      { value: "Salmiya, Kuwait", label: "Salmiya", labelAr: "السالمية" }
     ]
   },
   { 
     value: "Qatar", 
     label: "Qatar",
+    labelAr: "قطر",
     cities: [
-      { value: "Qatar", label: "All over Qatar (Country-wide)" },
-      { value: "Doha, Qatar", label: "Doha" },
-      { value: "Al Rayyan, Qatar", label: "Al Rayyan" },
-      { value: "Al Wakrah, Qatar", label: "Al Wakrah" }
-    ]
-  },
-  { 
-    value: "Bahrain", 
-    label: "Bahrain",
-    cities: [
-      { value: "Bahrain", label: "All over Bahrain (Country-wide)" },
-      { value: "Manama, Bahrain", label: "Manama" },
-      { value: "Muharraq, Bahrain", label: "Muharraq" },
-      { value: "Riffa, Bahrain", label: "Riffa" }
-    ]
-  },
-  { 
-    value: "Oman", 
-    label: "Oman",
-    cities: [
-      { value: "Oman", label: "All over Oman (Country-wide)" },
-      { value: "Muscat, Oman", label: "Muscat" },
-      { value: "Salalah, Oman", label: "Salalah" },
-      { value: "Nizwa, Oman", label: "Nizwa" }
-    ]
-  },
-  { 
-    value: "Jordan", 
-    label: "Jordan",
-    cities: [
-      { value: "Jordan", label: "All over Jordan (Country-wide)" },
-      { value: "Amman, Jordan", label: "Amman" },
-      { value: "Aqaba, Jordan", label: "Aqaba" },
-      { value: "Irbid, Jordan", label: "Irbid" }
-    ]
-  },
-  { 
-    value: "Lebanon", 
-    label: "Lebanon",
-    cities: [
-      { value: "Lebanon", label: "All over Lebanon (Country-wide)" },
-      { value: "Beirut, Lebanon", label: "Beirut" },
-      { value: "Tripoli, Lebanon", label: "Tripoli" },
-      { value: "Jounieh, Lebanon", label: "Jounieh" }
-    ]
-  },
-  { 
-    value: "Iraq", 
-    label: "Iraq",
-    cities: [
-      { value: "Iraq", label: "All over Iraq (Country-wide)" },
-      { value: "Baghdad, Iraq", label: "Baghdad" },
-      { value: "Basra, Iraq", label: "Basra" },
-      { value: "Erbil, Iraq", label: "Erbil" },
-      { value: "Mosul, Iraq", label: "Mosul" }
-    ]
-  },
-  { 
-    value: "Morocco", 
-    label: "Morocco",
-    cities: [
-      { value: "Morocco", label: "All over Morocco (Country-wide)" },
-      { value: "Casablanca, Morocco", label: "Casablanca" },
-      { value: "Rabat, Morocco", label: "Rabat" },
-      { value: "Marrakech, Morocco", label: "Marrakech" },
-      { value: "Fes, Morocco", label: "Fes" }
-    ]
-  },
-  { 
-    value: "Tunisia", 
-    label: "Tunisia",
-    cities: [
-      { value: "Tunisia", label: "All over Tunisia (Country-wide)" },
-      { value: "Tunis, Tunisia", label: "Tunis" },
-      { value: "Sfax, Tunisia", label: "Sfax" },
-      { value: "Sousse, Tunisia", label: "Sousse" }
-    ]
-  },
-  { 
-    value: "Algeria", 
-    label: "Algeria",
-    cities: [
-      { value: "Algeria", label: "All over Algeria (Country-wide)" },
-      { value: "Algiers, Algeria", label: "Algiers" },
-      { value: "Oran, Algeria", label: "Oran" },
-      { value: "Constantine, Algeria", label: "Constantine" }
-    ]
-  },
-  { 
-    value: "Turkey", 
-    label: "Turkey",
-    cities: [
-      { value: "Turkey", label: "All over Turkey (Country-wide)" },
-      { value: "Istanbul, Turkey", label: "Istanbul" },
-      { value: "Ankara, Turkey", label: "Ankara" },
-      { value: "Izmir, Turkey", label: "Izmir" },
-      { value: "Antalya, Turkey", label: "Antalya" }
-    ]
-  },
-  { 
-    value: "USA", 
-    label: "United States",
-    cities: [
-      { value: "United States", label: "All over USA (Country-wide)" },
-      { value: "New York, USA", label: "New York" },
-      { value: "Los Angeles, USA", label: "Los Angeles" },
-      { value: "Chicago, USA", label: "Chicago" },
-      { value: "Houston, USA", label: "Houston" },
-      { value: "Miami, USA", label: "Miami" },
-      { value: "San Francisco, USA", label: "San Francisco" }
-    ]
-  },
-  { 
-    value: "UK", 
-    label: "United Kingdom",
-    cities: [
-      { value: "United Kingdom", label: "All over UK (Country-wide)" },
-      { value: "London, UK", label: "London" },
-      { value: "Manchester, UK", label: "Manchester" },
-      { value: "Birmingham, UK", label: "Birmingham" },
-      { value: "Liverpool, UK", label: "Liverpool" }
-    ]
-  },
-  { 
-    value: "Canada", 
-    label: "Canada",
-    cities: [
-      { value: "Canada", label: "All over Canada (Country-wide)" },
-      { value: "Toronto, Canada", label: "Toronto" },
-      { value: "Vancouver, Canada", label: "Vancouver" },
-      { value: "Montreal, Canada", label: "Montreal" },
-      { value: "Calgary, Canada", label: "Calgary" }
-    ]
-  },
-  { 
-    value: "Australia", 
-    label: "Australia",
-    cities: [
-      { value: "Australia", label: "All over Australia (Country-wide)" },
-      { value: "Sydney, Australia", label: "Sydney" },
-      { value: "Melbourne, Australia", label: "Melbourne" },
-      { value: "Brisbane, Australia", label: "Brisbane" },
-      { value: "Perth, Australia", label: "Perth" }
-    ]
-  },
-  { 
-    value: "Germany", 
-    label: "Germany",
-    cities: [
-      { value: "Germany", label: "All over Germany (Country-wide)" },
-      { value: "Berlin, Germany", label: "Berlin" },
-      { value: "Munich, Germany", label: "Munich" },
-      { value: "Hamburg, Germany", label: "Hamburg" },
-      { value: "Frankfurt, Germany", label: "Frankfurt" }
-    ]
-  },
-  { 
-    value: "France", 
-    label: "France",
-    cities: [
-      { value: "France", label: "All over France (Country-wide)" },
-      { value: "Paris, France", label: "Paris" },
-      { value: "Marseille, France", label: "Marseille" },
-      { value: "Lyon, France", label: "Lyon" }
-    ]
-  },
-  { 
-    value: "Italy", 
-    label: "Italy",
-    cities: [
-      { value: "Italy", label: "All over Italy (Country-wide)" },
-      { value: "Rome, Italy", label: "Rome" },
-      { value: "Milan, Italy", label: "Milan" },
-      { value: "Naples, Italy", label: "Naples" }
-    ]
-  },
-  { 
-    value: "Spain", 
-    label: "Spain",
-    cities: [
-      { value: "Spain", label: "All over Spain (Country-wide)" },
-      { value: "Madrid, Spain", label: "Madrid" },
-      { value: "Barcelona, Spain", label: "Barcelona" },
-      { value: "Valencia, Spain", label: "Valencia" }
-    ]
-  },
-  { 
-    value: "India", 
-    label: "India",
-    cities: [
-      { value: "India", label: "All over India (Country-wide)" },
-      { value: "Mumbai, India", label: "Mumbai" },
-      { value: "Delhi, India", label: "Delhi" },
-      { value: "Bangalore, India", label: "Bangalore" },
-      { value: "Kolkata, India", label: "Kolkata" }
-    ]
-  },
-  { 
-    value: "China", 
-    label: "China",
-    cities: [
-      { value: "China", label: "All over China (Country-wide)" },
-      { value: "Beijing, China", label: "Beijing" },
-      { value: "Shanghai, China", label: "Shanghai" },
-      { value: "Guangzhou, China", label: "Guangzhou" },
-      { value: "Shenzhen, China", label: "Shenzhen" }
-    ]
-  },
-  { 
-    value: "Japan", 
-    label: "Japan",
-    cities: [
-      { value: "Japan", label: "All over Japan (Country-wide)" },
-      { value: "Tokyo, Japan", label: "Tokyo" },
-      { value: "Osaka, Japan", label: "Osaka" },
-      { value: "Kyoto, Japan", label: "Kyoto" }
-    ]
-  },
-  { 
-    value: "South Korea", 
-    label: "South Korea",
-    cities: [
-      { value: "South Korea", label: "All over South Korea (Country-wide)" },
-      { value: "Seoul, South Korea", label: "Seoul" },
-      { value: "Busan, South Korea", label: "Busan" },
-      { value: "Incheon, South Korea", label: "Incheon" }
-    ]
-  },
-  { 
-    value: "Singapore", 
-    label: "Singapore",
-    cities: [
-      { value: "Singapore", label: "All over Singapore (Country-wide)" },
-      { value: "Singapore City, Singapore", label: "Singapore City" }
-    ]
-  },
-  { 
-    value: "Malaysia", 
-    label: "Malaysia",
-    cities: [
-      { value: "Malaysia", label: "All over Malaysia (Country-wide)" },
-      { value: "Kuala Lumpur, Malaysia", label: "Kuala Lumpur" },
-      { value: "Penang, Malaysia", label: "Penang" },
-      { value: "Johor Bahru, Malaysia", label: "Johor Bahru" }
-    ]
-  },
-  { 
-    value: "Indonesia", 
-    label: "Indonesia",
-    cities: [
-      { value: "Indonesia", label: "All over Indonesia (Country-wide)" },
-      { value: "Jakarta, Indonesia", label: "Jakarta" },
-      { value: "Bali, Indonesia", label: "Bali" },
-      { value: "Surabaya, Indonesia", label: "Surabaya" }
-    ]
-  },
-  { 
-    value: "Thailand", 
-    label: "Thailand",
-    cities: [
-      { value: "Thailand", label: "All over Thailand (Country-wide)" },
-      { value: "Bangkok, Thailand", label: "Bangkok" },
-      { value: "Phuket, Thailand", label: "Phuket" },
-      { value: "Chiang Mai, Thailand", label: "Chiang Mai" }
-    ]
-  },
-  { 
-    value: "Pakistan", 
-    label: "Pakistan",
-    cities: [
-      { value: "Pakistan", label: "All over Pakistan (Country-wide)" },
-      { value: "Karachi, Pakistan", label: "Karachi" },
-      { value: "Lahore, Pakistan", label: "Lahore" },
-      { value: "Islamabad, Pakistan", label: "Islamabad" }
-    ]
-  },
-  { 
-    value: "Bangladesh", 
-    label: "Bangladesh",
-    cities: [
-      { value: "Bangladesh", label: "All over Bangladesh (Country-wide)" },
-      { value: "Dhaka, Bangladesh", label: "Dhaka" },
-      { value: "Chittagong, Bangladesh", label: "Chittagong" }
-    ]
-  },
-  { 
-    value: "Russia", 
-    label: "Russia",
-    cities: [
-      { value: "Russia", label: "All over Russia (Country-wide)" },
-      { value: "Moscow, Russia", label: "Moscow" },
-      { value: "Saint Petersburg, Russia", label: "Saint Petersburg" }
-    ]
-  },
-  { 
-    value: "Brazil", 
-    label: "Brazil",
-    cities: [
-      { value: "Brazil", label: "All over Brazil (Country-wide)" },
-      { value: "São Paulo, Brazil", label: "São Paulo" },
-      { value: "Rio de Janeiro, Brazil", label: "Rio de Janeiro" },
-      { value: "Brasília, Brazil", label: "Brasília" }
-    ]
-  },
-  { 
-    value: "Mexico", 
-    label: "Mexico",
-    cities: [
-      { value: "Mexico", label: "All over Mexico (Country-wide)" },
-      { value: "Mexico City, Mexico", label: "Mexico City" },
-      { value: "Guadalajara, Mexico", label: "Guadalajara" },
-      { value: "Monterrey, Mexico", label: "Monterrey" }
-    ]
-  },
-  { 
-    value: "South Africa", 
-    label: "South Africa",
-    cities: [
-      { value: "South Africa", label: "All over South Africa (Country-wide)" },
-      { value: "Cape Town, South Africa", label: "Cape Town" },
-      { value: "Johannesburg, South Africa", label: "Johannesburg" },
-      { value: "Durban, South Africa", label: "Durban" }
-    ]
-  },
-  { 
-    value: "Nigeria", 
-    label: "Nigeria",
-    cities: [
-      { value: "Nigeria", label: "All over Nigeria (Country-wide)" },
-      { value: "Lagos, Nigeria", label: "Lagos" },
-      { value: "Abuja, Nigeria", label: "Abuja" },
-      { value: "Kano, Nigeria", label: "Kano" }
-    ]
-  },
-  { 
-    value: "Kenya", 
-    label: "Kenya",
-    cities: [
-      { value: "Kenya", label: "All over Kenya (Country-wide)" },
-      { value: "Nairobi, Kenya", label: "Nairobi" },
-      { value: "Mombasa, Kenya", label: "Mombasa" }
+      { value: "Qatar", label: "All over Qatar (Country-wide)", labelAr: "جميع أنحاء قطر" },
+      { value: "Doha, Qatar", label: "Doha", labelAr: "الدوحة" },
+      { value: "Al Rayyan, Qatar", label: "Al Rayyan", labelAr: "الريان" },
+      { value: "Al Wakrah, Qatar", label: "Al Wakrah", labelAr: "الوكرة" }
     ]
   },
   { 
     value: "Global", 
     label: "Global / Worldwide",
+    labelAr: "عالمي / جميع أنحاء العالم",
     cities: [
-      { value: "Global / Worldwide", label: "Global / Worldwide" }
+      { value: "Global / Worldwide", label: "Global / Worldwide", labelAr: "عالمي / جميع أنحاء العالم" }
     ]
   }
+  // (يمكنك إضافة باقي الدول بنفس النمط: labelAr للدول و labelAr للمدن)
 ]

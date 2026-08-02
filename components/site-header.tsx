@@ -1,21 +1,17 @@
 'use client'
 
 import { useState } from 'react'
-import { Menu, X, ArrowRight, LogOut } from 'lucide-react'
+import { Menu, X, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { UserButton, useUser } from '@clerk/nextjs'
-
-const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'Features', href: '#features' },
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'How it Works', href: '#how-it-works' },
-]
+import { LanguageSwitcher } from './language-switcher' // ✅ استيراد زر تبديل اللغة
+import { useTranslation } from '@/lib/i18n' // ✅ استيراد دالة الترجمة
 
 export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { isSignedIn, user } = useUser()
+  const { t } = useTranslation() // ✅ تفعيل دالة الترجمة
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('/')) return 
@@ -45,27 +41,32 @@ export function SiteHeader() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </a>
-          ))}
+          <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+            {t('nav.home')}
+          </a>
+          <a href="#features" onClick={(e) => handleNavClick(e, '#features')} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+            {t('nav.features')}
+          </a>
+          <a href="#pricing" onClick={(e) => handleNavClick(e, '#pricing')} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+            {t('nav.pricing')}
+          </a>
+          <a href="#how-it-works" onClick={(e) => handleNavClick(e, '#how-it-works')} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+            {t('nav.howItWorks')}
+          </a>
         </nav>
 
-        {/* Desktop CTA - يظهر حسب حالة تسجيل الدخول */}
+        {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-4">
+          {/* ✅ زر تبديل اللغة يظهر هنا */}
+          <LanguageSwitcher />
+          
           {isSignedIn ? (
             <>
               <Link
                 href="/dashboard"
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
-                Dashboard
+                {t('nav.dashboard')}
               </Link>
               <UserButton 
                 afterSignOutUrl="/"
@@ -81,7 +82,7 @@ export function SiteHeader() {
               href="/login"
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-teal to-purple px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-teal/20 transition-all hover:scale-105 hover:shadow-teal/30"
             >
-              Get Started
+              {t('auth.getStarted')}
               <ArrowRight className="h-4 w-4" />
             </Link>
           )}
@@ -101,24 +102,28 @@ export function SiteHeader() {
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-white/10 bg-background">
           <nav className="flex flex-col gap-4 px-4 py-6">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {link.label}
-              </a>
-            ))}
+            <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+              {t('nav.home')}
+            </a>
+            <a href="#features" onClick={(e) => handleNavClick(e, '#features')} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+              {t('nav.features')}
+            </a>
+            <a href="#pricing" onClick={(e) => handleNavClick(e, '#pricing')} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+              {t('nav.pricing')}
+            </a>
+            <a href="#how-it-works" onClick={(e) => handleNavClick(e, '#how-it-works')} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+              {t('nav.howItWorks')}
+            </a>
             
+            {/* ✅ زر تبديل اللغة في الموبايل */}
+            <div className="pt-4 border-t border-white/10">
+              <LanguageSwitcher />
+            </div>
+
             {isSignedIn ? (
               <>
-                <Link
-                  href="/dashboard"
-                  className="text-sm font-medium text-teal hover:text-teal/80"
-                >
-                  Dashboard
+                <Link href="/dashboard" className="text-sm font-medium text-teal hover:text-teal/80">
+                  {t('nav.dashboard')}
                 </Link>
                 <div className="flex items-center gap-3 px-4 py-2">
                   <UserButton afterSignOutUrl="/" />
@@ -132,7 +137,7 @@ export function SiteHeader() {
                 href="/login"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-teal to-purple px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-teal/20 transition-all hover:scale-105"
               >
-                Get Started
+                {t('auth.getStarted')}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             )}

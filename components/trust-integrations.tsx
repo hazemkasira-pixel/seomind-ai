@@ -1,6 +1,11 @@
+'use client'
+
 import Image from 'next/image'
+import { useTranslation } from '@/lib/i18n'
 
 export function TrustIntegrations() {
+  const { t } = useTranslation()
+  
   const row1 = [
     { name: 'Google My Business', src: '/logos/google my business.svg' },
     { name: 'Google Search Console', src: '/logos/google search console.svg' },
@@ -28,13 +33,12 @@ export function TrustIntegrations() {
 
   return (
     <section className="relative z-0 overflow-hidden py-20">
-      {/* Header */}
       <div className="mb-16 text-center">
         <h2 className="text-3xl font-bold text-white sm:text-4xl">
-          Trusted by 12,400+ websites worldwide
+          {t('trust.title')} 12,400+ websites worldwide
         </h2>
         <p className="mt-4 text-lg text-gray-400">
-          Seamless integrations with the tools you already use
+          {t('trust.subtitle')}
         </p>
       </div>
 
@@ -42,36 +46,10 @@ export function TrustIntegrations() {
       <div className="relative mb-8">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-[#0d1b2a] to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-[#0d1b2a] to-transparent" />
-
         <div className="marquee-row-1 flex gap-6">
-          {row1.map((item, i) => (
-            <div
-              key={`row1-${i}`}
-              className="flex shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 px-8 py-4 backdrop-blur-sm transition-all hover:border-teal/50 hover:bg-white/10"
-              style={{ minWidth: '160px' }}
-            >
-              <Image
-                src={item.src}
-                alt={item.name}
-                width={120}
-                height={32}
-                className="h-8 w-auto object-contain opacity-90 transition-all hover:opacity-100"
-              />
-            </div>
-          ))}
-          {row1.map((item, i) => (
-            <div
-              key={`row1-dup-${i}`}
-              className="flex shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 px-8 py-4 backdrop-blur-sm transition-all hover:border-teal/50 hover:bg-white/10"
-              style={{ minWidth: '160px' }}
-            >
-              <Image
-                src={item.src}
-                alt={item.name}
-                width={120}
-                height={32}
-                className="h-8 w-auto object-contain opacity-90 transition-all hover:opacity-100"
-              />
+          {[...row1, ...row1].map((item, i) => (
+            <div key={`row1-${i}`} className="flex shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 px-8 py-4 backdrop-blur-sm transition-all hover:border-teal/50 hover:bg-white/10" style={{ minWidth: '160px' }}>
+              <Image src={item.src} alt={item.name} width={120} height={32} className="h-8 w-auto object-contain opacity-90 transition-all hover:opacity-100" />
             </div>
           ))}
         </div>
@@ -81,36 +59,10 @@ export function TrustIntegrations() {
       <div className="relative">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-[#0d1b2a] to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-[#0d1b2a] to-transparent" />
-
         <div className="marquee-row-2 flex gap-6">
-          {row2.map((item, i) => (
-            <div
-              key={`row2-${i}`}
-              className="flex shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 px-8 py-4 backdrop-blur-sm transition-all hover:border-teal/50 hover:bg-white/10"
-              style={{ minWidth: '160px' }}
-            >
-              <Image
-                src={item.src}
-                alt={item.name}
-                width={120}
-                height={32}
-                className="h-8 w-auto object-contain opacity-90 transition-all hover:opacity-100"
-              />
-            </div>
-          ))}
-          {row2.map((item, i) => (
-            <div
-              key={`row2-dup-${i}`}
-              className="flex shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 px-8 py-4 backdrop-blur-sm transition-all hover:border-teal/50 hover:bg-white/10"
-              style={{ minWidth: '160px' }}
-            >
-              <Image
-                src={item.src}
-                alt={item.name}
-                width={120}
-                height={32}
-                className="h-8 w-auto object-contain opacity-90 transition-all hover:opacity-100"
-              />
+          {[...row2, ...row2].map((item, i) => (
+            <div key={`row2-${i}`} className="flex shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 px-8 py-4 backdrop-blur-sm transition-all hover:border-teal/50 hover:bg-white/10" style={{ minWidth: '160px' }}>
+              <Image src={item.src} alt={item.name} width={120} height={32} className="h-8 w-auto object-contain opacity-90 transition-all hover:opacity-100" />
             </div>
           ))}
         </div>

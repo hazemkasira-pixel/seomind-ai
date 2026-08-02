@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
 import { Toaster } from 'sonner'
-import { Inter } from 'next/font/google' // ✅ استيراد الخط
+import { Inter } from 'next/font/google'
+import { I18nProvider } from '@/lib/i18n' // ✅ إضافة مزود الترجمة
 import './globals.css'
 
 // ✅ تحميل الخط محلياً وتحسينه
@@ -31,12 +32,14 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" className={inter.className}> {/* ✅ تطبيق الخط على الـ html */}
-        <body className="antialiased">
-          {children}
-          <Toaster position="top-center" richColors />
-        </body>
-      </html>
+      <I18nProvider> {/* ✅ تغليف المحتوى بمزود الترجمة */}
+        <html lang="en" className={inter.className}>
+          <body className="antialiased">
+            {children}
+            <Toaster position="top-center" richColors />
+          </body>
+        </html>
+      </I18nProvider>
     </ClerkProvider>
   )
 }

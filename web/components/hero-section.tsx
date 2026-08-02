@@ -2,47 +2,24 @@
 
 import type React from 'react'
 import { useState } from 'react'
-import { ArrowRight, Sparkles, Zap, Loader2, Globe, Briefcase, MapPin, AlertCircle, Target } from 'lucide-react'
+import { ArrowRight, Sparkles, Zap, Loader2, Globe, Briefcase, MapPin, AlertCircle } from 'lucide-react'
 import { CustomSelect } from './custom-select'
 import { nicheGroups, countries } from '@/lib/select-data'
 import { useRouter } from 'next/navigation'
-import { useTranslation } from '@/lib/i18n'
 
 export function HeroSection() {
   const router = useRouter()
-  const { t, language } = useTranslation() // ✅ استخلاص اللغة الحالية
-  
   const [url, setUrl] = useState('')
   const [niche, setNiche] = useState('')
   const [selectedCountry, setSelectedCountry] = useState('')
   const [location, setLocation] = useState('')
-  const [competitorUrl, setCompetitorUrl] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
-  // ✅ دالة مساعدة لترجمة القوائم ديناميكياً
-  const getTranslatedOptions = (items: any[]) => {
-    return items.map((item: any) => ({
-      value: item.value,
-      label: language === 'ar' ? (item.labelAr || item.label) : item.label
-    }))
-  }
-
-  const getTranslatedGroups = (groups: any[]) => {
-    return groups.map((group: any) => ({
-      label: language === 'ar' ? (group.labelAr || group.label) : group.label,
-      options: getTranslatedOptions(group.options)
-    }))
-  }
-
-  const translatedNicheGroups = getTranslatedGroups(nicheGroups)
-  const translatedCountries = getTranslatedOptions(countries)
-
   const selectedCountryData = countries.find(c => c.value === selectedCountry)
-  
   const cityOptions = selectedCountryData ? [{
-    label: t('hero.form.city'),
-    options: getTranslatedOptions(selectedCountryData.cities)
+    label: "Select City or Country-wide",
+    options: selectedCountryData.cities
   }] : []
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -50,20 +27,15 @@ export function HeroSection() {
     setError('')
 
     if (!url || !niche || !selectedCountry) {
-      setError(t('hero.form.error'))
+      setError('Please fill in the URL, Niche, and select at least a Country.')
       return
     }
 
     const finalLocation = location || (selectedCountryData ? selectedCountryData.label : selectedCountry)
-    const urlPattern = /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/
-    
-    if (!urlPattern.test(url)) {
-      setError(t('hero.form.invalidUrl'))
-      return
-    }
 
-    if (competitorUrl && !urlPattern.test(competitorUrl)) {
-      setError(t('hero.form.invalidCompetitor'))
+    const urlPattern = /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/
+    if (!urlPattern.test(url)) {
+      setError('Please enter a valid URL (e.g., https://example.com or example.com)')
       return
     }
 
@@ -72,16 +44,22 @@ export function HeroSection() {
     try {
       const response = await fetch('/api/analyze', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url, niche, location: finalLocation, competitorUrl: competitorUrl || null }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url, niche, location: finalLocation }),
       })
 
       const data = await response.json()
-      if (!response.ok) throw new Error(data.error || 'Something went wrong')
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong')
+      }
 
       if (typeof window !== 'undefined' && data.data) {
         localStorage.setItem(`analysis_${data.analysisId}`, JSON.stringify(data.data))
       }
+
       router.push(`/dashboard?analysis=${data.analysisId}`)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to start analysis')
@@ -92,28 +70,38 @@ export function HeroSection() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center py-20 px-4">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-br from-background via-background to-teal/5" />
-      <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/4 -translate-x-1/2 h-[600px] w-[800px] max-w-[90vw] rounded-full bg-teal/10 blur-[120px]" />
+      {/* خلفية أنظف وأقل تشتيتاً */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-background via-background to-teal/5"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-1/4 -translate-x-1/2 h-[600px] w-[800px] max-w-[90vw] rounded-full bg-teal/10 blur-[120px]"
+      />
 
       <div className="relative z-10 w-full max-w-6xl mx-auto">
+        {/* Header Text */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 rounded-full border border-teal/30 bg-teal/5 px-4 py-1.5 text-sm font-medium text-teal mb-6">
             <Sparkles className="h-4 w-4" />
-            {t('hero.badge')}
+            AI-Powered SEO Analysis
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 leading-tight">
-            {t('hero.title1')}{' '}
+            Unlock Your Website's{' '}
             <span className="bg-gradient-to-r from-teal to-purple bg-clip-text text-transparent">
-              {t('hero.title2')}
+              Full Potential
             </span>
           </h1>
           
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t('hero.subtitle')}
+            Get instant, actionable SEO insights powered by advanced AI. 
+            Analyze, optimize, and dominate your local market.
           </p>
         </div>
 
+        {/* Form Container */}
         <div className="glow-border rounded-3xl p-6 md:p-8 lg:p-10 bg-card/80 backdrop-blur-xl border border-border/50">
           {error && (
             <div className="mb-6 rounded-xl bg-red-500/10 border border-red-500/30 p-4 text-sm text-red-400 flex items-center gap-2">
@@ -123,17 +111,18 @@ export function HeroSection() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* الصف الأول: URL و Niche */}
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                   <Globe className="h-4 w-4 text-teal" />
-                  {t('hero.form.url')}
+                  Website URL
                 </label>
                 <input
                   type="text"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
-                  placeholder={t('hero.form.urlPlaceholder')}
+                  placeholder="https://yoursite.com"
                   className="h-12 w-full rounded-xl border border-border bg-background/50 px-4 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-teal/50 focus:ring-2 focus:ring-teal/20"
                 />
               </div>
@@ -141,26 +130,27 @@ export function HeroSection() {
               <div className="space-y-2">
                 <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                   <Briefcase className="h-4 w-4 text-teal" />
-                  {t('hero.form.niche')}
+                  Business Niche
                 </label>
                 <CustomSelect
                   value={niche}
                   onChange={setNiche}
-                  placeholder={t('hero.form.nichePlaceholder')}
-                  groups={translatedNicheGroups} // ✅ استخدام القوائم المترجمة
+                  placeholder="Select your business type"
+                  groups={nicheGroups}
                   searchable={true}
                 />
               </div>
             </div>
 
+            {/* الصف الثاني: Location */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                   <MapPin className="h-4 w-4 text-teal" />
-                  {t('hero.form.location')}
+                  Target Location
                 </label>
                 <span className="text-xs text-muted-foreground">
-                  {t('hero.form.locationHint')}
+                  City optional • Country-wide targeting available
                 </span>
               </div>
               
@@ -171,38 +161,22 @@ export function HeroSection() {
                     setSelectedCountry(value)
                     setLocation('')
                   }}
-                  placeholder={t('hero.form.country')}
-                  groups={[{ label: "Countries", options: translatedCountries }]} // ✅ استخدام القوائم المترجمة
+                  placeholder="Select Country"
+                  groups={[{ label: "Countries", options: countries.map(c => ({ value: c.value, label: c.label })) }]}
                   searchable={true}
                 />
                 <CustomSelect
                   value={location}
                   onChange={setLocation}
-                  placeholder={selectedCountry ? t('hero.form.city') : t('hero.form.cityFirst')}
-                  groups={cityOptions} // ✅ استخدام القوائم المترجمة
+                  placeholder={selectedCountry ? "Select city (optional)" : "Select country first"}
+                  groups={cityOptions}
                   disabled={!selectedCountry}
                   searchable={true}
                 />
               </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                <Target className="h-4 w-4 text-purple" />
-                {t('hero.form.competitor')} <span className="text-xs text-muted-foreground font-normal">{t('hero.form.competitorOptional')}</span>
-              </label>
-              <input
-                type="text"
-                value={competitorUrl}
-                onChange={(e) => setCompetitorUrl(e.target.value)}
-                placeholder={t('hero.form.competitorPlaceholder')}
-                className="h-12 w-full rounded-xl border border-border bg-background/50 px-4 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-purple/50 focus:ring-2 focus:ring-purple/20"
-              />
-              <p className="text-xs text-muted-foreground">
-                {t('hero.form.competitorHint')}
-              </p>
-            </div>
-
+            {/* زر التحليل */}
             <button
               type="submit"
               disabled={isLoading}
@@ -211,36 +185,38 @@ export function HeroSection() {
               {isLoading ? (
                 <>
                   <Loader2 className="h-5 w-5 animate-spin" />
-                  {t('hero.form.loading')}
+                  Analyzing your website...
                 </>
               ) : (
                 <>
-                  {t('hero.form.submit')}
+                  Analyze My Website
                   <ArrowRight className="h-5 w-5" />
                 </>
               )}
             </button>
           </form>
 
+          {/* Footer Info */}
           <div className="mt-6 pt-6 border-t border-border/50 flex items-center justify-center gap-6 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <Zap className="h-4 w-4 text-teal" />
-              <span>{t('hero.features.instant')}</span>
+              <span>Instant Results</span>
             </div>
             <div className="flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-purple" />
-              <span>{t('hero.features.ai')}</span>
+              <span>AI-Powered</span>
             </div>
             <div className="flex items-center gap-2">
               <Globe className="h-4 w-4 text-teal" />
-              <span>{t('hero.features.local')}</span>
+              <span>Local SEO Focus</span>
             </div>
           </div>
         </div>
 
+        {/* Trust Badges */}
         <div className="mt-8 text-center">
           <p className="text-sm text-muted-foreground mb-4">
-            {t('hero.trusted')}
+            Trusted by businesses worldwide
           </p>
           <div className="flex items-center justify-center gap-8 opacity-50 grayscale">
             <div className="h-8 w-20 bg-muted rounded" />
