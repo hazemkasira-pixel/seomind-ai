@@ -321,5 +321,4 @@ export const countries = [
       { value: "Global / Worldwide", label: "Global / Worldwide", labelAr: "عالمي / جميع أنحاء العالم" }
     ]
   }
-  // (يمكنك إضافة باقي الدول بنفس النمط: labelAr للدول و labelAr للمدن)
 ]

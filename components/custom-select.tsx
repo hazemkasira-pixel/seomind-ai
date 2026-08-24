@@ -110,10 +110,12 @@ export function CustomSelect({
       </button>
 
       {isOpen && !disabled && (
-        <div className="custom-scrollbar absolute z-50 mt-2 w-full rounded-xl border border-border bg-background/95 backdrop-blur-xl shadow-2xl max-h-80 overflow-hidden">
-          {/* حقل البحث */}
+        // ✅ تم الإصلاح: استخدام flex flex-col بدلاً من overflow-hidden
+        <div className="absolute z-50 mt-2 w-full rounded-xl border border-border bg-background/95 backdrop-blur-xl shadow-2xl flex flex-col max-h-80">
+          
+          {/* حقل البحث - ثابت لا يتأثر بالاسكرول */}
           {searchable && (
-            <div className="sticky top-0 z-10 p-3 border-b border-border/50 bg-background/95 backdrop-blur-xl">
+            <div className="flex-shrink-0 z-10 p-3 border-b border-border/50 bg-background/95 backdrop-blur-xl">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <input
@@ -137,12 +139,12 @@ export function CustomSelect({
             </div>
           )}
 
-          {/* النتائج */}
-          <div className="overflow-y-auto max-h-[calc(80vh-120px)]">
+          {/* ✅ النتائج - تأخذ المساحة المتبقية وتسمح بالاسكرول */}
+          <div className="custom-scrollbar overflow-y-auto flex-1 py-2">
             {hasResults ? (
               filteredGroups.map((group, groupIndex) => (
-                <div key={groupIndex} className="py-2">
-                  <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider border-b border-border/30">
+                <div key={groupIndex} className="py-1">
+                  <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     {group.label}
                   </div>
                   {group.options.map((option) => (
@@ -154,7 +156,7 @@ export function CustomSelect({
                         setIsOpen(false)
                         setSearchQuery('')
                       }}
-                      className={`w-full px-4 py-3 text-left text-sm flex items-center justify-between transition-colors ${
+                      className={`w-full px-4 py-2.5 text-left text-sm flex items-center justify-between transition-colors ${
                         value === option.value
                           ? 'bg-teal/10 text-teal font-medium'
                           : 'text-foreground hover:bg-white/5'
@@ -182,6 +184,25 @@ export function CustomSelect({
           </div>
         </div>
       )}
+
+      {/* ✅ CSS مخصص للـ scrollbar ليظهر بشكل احترافي */}
+      <style jsx global>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+          border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: linear-gradient(180deg, #14b8a6, #7c3aed);
+          border-radius: 3px;
+          transition: all 0.2s;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(180deg, #0d9488, #6d28d9);
+        }
+      `}</style>
     </div>
   )
 }
