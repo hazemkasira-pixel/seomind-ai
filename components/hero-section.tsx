@@ -151,20 +151,23 @@ export function HeroSection() {
 
       <div className="relative z-10 w-full max-w-6xl mx-auto">
         <div className="text-center mb-12">
+          {/* ✅ Badge قوي */}
           <div className="inline-flex items-center gap-2 rounded-full border border-teal/30 bg-teal/5 px-4 py-1.5 text-sm font-medium text-teal mb-6">
             <Sparkles className="h-4 w-4" />
-            AI-Powered SEO Analysis
+            Set It & Forget It SEO
           </div>
           
+          {/* ✅ عنوان رئيسي قوي */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 leading-tight">
-            Dominate Local SEO{' '}
+            Automate Your SEO{' '}
             <span className="bg-gradient-to-r from-teal to-purple bg-clip-text text-transparent">
-              with AI Intelligence
+              With AI Intelligence
             </span>
           </h1>
           
+          {/* ✅ وصف تسويقي قوي */}
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Get instant, actionable SEO insights powered by advanced AI. Analyze, optimize, and dominate your local market.
+            Launch your SEO strategy in minutes. Our AI analyzes, optimizes, and publishes content automatically while you focus on growing your business.
           </p>
         </div>
 
