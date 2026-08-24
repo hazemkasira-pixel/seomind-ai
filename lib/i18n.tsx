@@ -1,26 +1,12 @@
 'use client'
 
 import React, { createContext, useContext, ReactNode } from 'react'
-import en from '@/translations/en.json'
 
 const I18nContext = createContext<any>(undefined)
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  // دالة الترجمة تعمل بالإنجليزية فقط
-  const t = (key: string): any => {
-    const keys = key.split('.')
-    let value: any = en
-    
-    for (const k of keys) {
-      if (value && typeof value === 'object' && k in value) {
-        value = value[k]
-      } else {
-        return key
-      }
-    }
-    
-    return value
-  }
+  // دالة ترجمة مؤقتة ترجع المفتاح كما هو لتجنب أي أخطاء
+  const t = (key: string): string => key
 
   return (
     <I18nContext.Provider value={{ language: 'en', setLanguage: () => {}, t }}>

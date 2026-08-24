@@ -3,7 +3,7 @@
 import type React from 'react'
 import { useState } from 'react'
 import { ArrowRight, Sparkles, Zap, Loader2, Globe, Briefcase, MapPin, AlertCircle } from 'lucide-react'
-import { CustomSelect } from './custom-select'
+import { CustomSelect } from '@/components/custom-select'
 import { nicheGroups, countries } from '@/lib/select-data'
 import { useRouter } from 'next/navigation'
 

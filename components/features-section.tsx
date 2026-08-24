@@ -6,21 +6,22 @@ import { useTranslation } from '@/lib/i18n'
 export function FeaturesSection() {
   const { t } = useTranslation()
 
+  // ✅ الحماية: التأكد من أن القيم نصية دائماً لتجنب أي أخطاء غير متوقعة
   const features = [
     {
       icon: <Sparkles className="h-8 w-8 text-teal" />,
-      title: t('features.items.aiPowered.title'),
-      desc: t('features.items.aiPowered.desc'),
+      title: String(t('features.items.aiPowered.title') || 'AI Powered'),
+      desc: String(t('features.items.aiPowered.desc') || 'Advanced AI analysis'),
     },
     {
       icon: <MapPin className="h-8 w-8 text-purple" />,
-      title: t('features.items.localSeo.title'),
-      desc: t('features.items.localSeo.desc'),
+      title: String(t('features.items.localSeo.title') || 'Local SEO'),
+      desc: String(t('features.items.localSeo.desc') || 'Dominate your local market'),
     },
     {
       icon: <Target className="h-8 w-8 text-teal" />,
-      title: t('features.items.competitor.title'),
-      desc: t('features.items.competitor.desc'),
+      title: String(t('features.items.competitor.title') || 'Competitor Analysis'),
+      desc: String(t('features.items.competitor.desc') || 'Outrank your competition'),
     },
   ]
 
@@ -29,10 +30,10 @@ export function FeaturesSection() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            {t('features.title')}
+            {String(t('features.title') || 'Our Features')}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t('features.subtitle')}
+            {String(t('features.subtitle') || 'Everything you need to succeed')}
           </p>
         </div>
 

@@ -5,21 +5,22 @@ import { useTranslation } from '@/lib/i18n'
 export function HowItWorks() {
   const { t } = useTranslation()
 
+  // ✅ الحماية: التأكد من أن القيم نصية دائماً
   const steps = [
     {
       number: '01',
-      title: t('howItWorks.steps.1.title'),
-      desc: t('howItWorks.steps.1.desc'),
+      title: String(t('howItWorks.steps.1.title') || 'Step 1'),
+      desc: String(t('howItWorks.steps.1.desc') || 'Description 1'),
     },
     {
       number: '02',
-      title: t('howItWorks.steps.2.title'),
-      desc: t('howItWorks.steps.2.desc'),
+      title: String(t('howItWorks.steps.2.title') || 'Step 2'),
+      desc: String(t('howItWorks.steps.2.desc') || 'Description 2'),
     },
     {
       number: '03',
-      title: t('howItWorks.steps.3.title'),
-      desc: t('howItWorks.steps.3.desc'),
+      title: String(t('howItWorks.steps.3.title') || 'Step 3'),
+      desc: String(t('howItWorks.steps.3.desc') || 'Description 3'),
     },
   ]
 
@@ -28,10 +29,10 @@ export function HowItWorks() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            {t('howItWorks.title')}
+            {String(t('howItWorks.title') || 'How It Works')}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t('howItWorks.subtitle')}
+            {String(t('howItWorks.subtitle') || 'Simple steps to success')}
           </p>
         </div>
 

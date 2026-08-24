@@ -8,8 +8,9 @@ export function FaqSection() {
   const { t } = useTranslation()
   const [openIndex, setOpenIndex] = useState<number | null>(0)
   
-  // Fetch FAQs from translation file
-  const faqs = t('faq.items') as any[]
+  // ✅ الحماية: التأكد من أن البيانات مصفوفة قبل عمل map
+  const faqsResult = t('faq.items')
+  const faqs = Array.isArray(faqsResult) ? faqsResult : []
 
   return (
     <section id="faq" className="mx-auto max-w-4xl px-4 py-24 sm:px-6 lg:px-8">
@@ -18,10 +19,13 @@ export function FaqSection() {
           FAQ
         </span>
         <h2 className="mx-auto mt-6 max-w-3xl text-balance text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-          {t('faq.title').split(' ')[0]} <span className="gradient-text">{t('faq.title').split(' ').slice(1).join(' ')}</span>
+          {typeof t('faq.title') === 'string' ? t('faq.title').split(' ')[0] : 'FAQ'}{' '}
+          <span className="gradient-text">
+            {typeof t('faq.title') === 'string' ? t('faq.title').split(' ').slice(1).join(' ') : ''}
+          </span>
         </h2>
         <p className="mt-5 text-lg text-muted-foreground">
-          {t('faq.subtitle')}
+          {typeof t('faq.subtitle') === 'string' ? t('faq.subtitle') : ''}
         </p>
       </div>
 
@@ -40,7 +44,7 @@ export function FaqSection() {
                 className="flex w-full items-center justify-between px-6 py-5 text-left"
               >
                 <span className={`text-base font-semibold ${isOpen ? 'text-teal' : 'text-foreground'}`}>
-                  {faq.q}
+                  {faq.q || ''}
                 </span>
                 <ChevronDown
                   className={`h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300 ${
@@ -55,7 +59,7 @@ export function FaqSection() {
               >
                 <div className="overflow-hidden">
                   <p className="px-6 pb-5 text-sm leading-relaxed text-muted-foreground">
-                    {faq.a}
+                    {faq.a || ''}
                   </p>
                 </div>
               </div>

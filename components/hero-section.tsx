@@ -32,44 +32,38 @@ export function HeroSection() {
   const supabase = createClient()
   
   const [accountType, setAccountType] = useState<'personal' | 'company' | null>(null)
-  
   const [url, setUrl] = useState('')
   const [niche, setNiche] = useState('')
   const [selectedCountry, setSelectedCountry] = useState('')
   const [selectedCity, setSelectedCity] = useState('')
-  
-  // ✅ حالة مدن التغطية
   const [coverageCities, setCoverageCities] = useState<string[]>([])
-  
   const [jobTitle, setJobTitle] = useState('')
   const [experience, setExperience] = useState('')
   const [selectedGoal, setSelectedGoal] = useState('')
-  
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
-  // ✅ دوال الترجمة
-  const getTranslatedOptions = (items: any[]) => {
-    return items.map((item: any) => ({
+  // ✅ الحماية: التأكد من أن البيانات مصفوفة قبل عمل map
+  const getTranslatedOptions = (items: any[] | undefined) => {
+    return (items || []).map((item: any) => ({
       value: item.value,
       label: language === 'ar' ? (item.labelAr || item.label) : item.label
     }))
   }
 
-  const getTranslatedGroups = (groups: any[]) => {
-    return groups.map((group: any) => ({
+  const getTranslatedGroups = (groups: any[] | undefined) => {
+    return (groups || []).map((group: any) => ({
       label: language === 'ar' ? (group.labelAr || group.label) : group.label,
       options: getTranslatedOptions(group.options)
     }))
   }
 
-  // ✅ استخدام البيانات مباشرة من select-data.ts
   const translatedNicheGroups = getTranslatedGroups(nicheGroups)
   const translatedCountries = getTranslatedOptions(countries)
   const translatedCareerGoals = getTranslatedOptions(careerGoals)
   const translatedExperienceOptions = getTranslatedOptions(experienceOptions)
 
-  const selectedCountryData = countries.find(c => c.value === selectedCountry)
+  const selectedCountryData = countries?.find((c: any) => c.value === selectedCountry)
 
   const handleAccountSelection = (type: 'personal' | 'company') => {
     setAccountType(type)
@@ -129,7 +123,7 @@ export function HeroSection() {
           url, 
           niche, 
           location: finalLocation, 
-          coverageCities, // ✅ إرسال مدن التغطية
+          coverageCities,
           accountType,
           ...(accountType === 'personal' && {
             jobTitle,
@@ -262,7 +256,6 @@ export function HeroSection() {
                 </div>
               </div>
 
-              {/* ✅ Card 1: المعلومات الأساسية */}
               <div className="rounded-2xl border border-border/50 bg-card/30 p-6 space-y-6">
                 <div className="flex items-center gap-3 pb-4 border-b border-border/50">
                   <div className="p-2 rounded-lg bg-teal/10">
@@ -279,7 +272,6 @@ export function HeroSection() {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
-                  {/* الرابط */}
                   <div className="space-y-2">
                     <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                       <Globe className="h-4 w-4 text-teal" />
@@ -298,7 +290,6 @@ export function HeroSection() {
                     />
                   </div>
 
-                  {/* المجال (يسحب البيانات مباشرة من select-data.ts) */}
                   <div className="space-y-2">
                     <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                       <Briefcase className="h-4 w-4 text-teal" />
@@ -318,9 +309,7 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                {/* ✅ الدولة + المدينة في نفس الصف (بنفس التنسيق) */}
                 <div className="grid md:grid-cols-2 gap-6 pt-4 border-t border-border/50">
-                  {/* حقل الدولة */}
                   <div className="space-y-2">
                     <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                       <MapPin className="h-4 w-4 text-teal" />
@@ -342,7 +331,6 @@ export function HeroSection() {
                     />
                   </div>
 
-                  {/* ✅ حقل المدينة الأساسية - مع الإصلاح */}
                   <div className="space-y-2">
                     <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                       <MapPin className="h-4 w-4 text-purple" />
@@ -352,7 +340,6 @@ export function HeroSection() {
                       </span>
                     </label>
                     
-                    {/* ✅ عرض المدن مباشرة إذا كانت الدولة محددة */}
                     {selectedCountry && selectedCountryData?.cities && selectedCountryData.cities.length > 0 ? (
                       <CustomSelect
                         value={selectedCity}
@@ -372,7 +359,7 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                {/* ✅ حقل مدن التغطية (اختياري - متعدد الاختيار) */}
+                {/* ✅ هنا تم إضافة الحماية (|| []) لمنع خطأ .map */}
                 {selectedCountry && selectedCountryData?.cities && selectedCountryData.cities.length > 0 && (
                   <div className="space-y-3 pt-2">
                     <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
@@ -383,7 +370,7 @@ export function HeroSection() {
                       </span>
                     </label>
                     <div className="flex flex-wrap gap-2">
-                      {selectedCountryData.cities.map((city: any) => {
+                      {(selectedCountryData.cities || []).map((city: any) => {
                         const cityLabel = language === 'ar' ? (city.labelAr || city.label) : city.label
                         const isSelected = coverageCities.includes(city.value)
                         return (
@@ -407,7 +394,6 @@ export function HeroSection() {
                 )}
               </div>
 
-              {/* ✅ Card 2: المعلومات المهنية (Personal Brand فقط) */}
               {accountType === 'personal' && (
                 <div className="rounded-2xl border border-teal/20 bg-gradient-to-br from-teal/5 via-transparent to-transparent p-6 space-y-6">
                   <div className="flex items-center justify-between pb-4 border-b border-border/50">
@@ -481,7 +467,6 @@ export function HeroSection() {
                 </div>
               )}
 
-              {/* زر الإرسال */}
               <button
                 type="submit"
                 disabled={isLoading}
@@ -504,7 +489,6 @@ export function HeroSection() {
             </form>
           )}
 
-          {/* المميزات + Powered by Groq */}
           <div className="mt-8 pt-8 border-t border-border/50">
             <div className="flex items-center justify-center gap-8 text-sm text-muted-foreground mb-6 flex-wrap">
               <div className="flex items-center gap-2.5 group">

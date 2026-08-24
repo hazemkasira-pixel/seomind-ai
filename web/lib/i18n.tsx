@@ -1,57 +1,13 @@
-'use client'
+﻿'use client'
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import en from '@/translations/en.json'
-import ar from '@/translations/ar.json'
+import React, { createContext, useContext, ReactNode } from 'react'
 
-type Language = 'en' | 'ar'
-
-type Translations = typeof en
-
-const translations: Record<Language, Translations> = {
-  en,
-  ar,
-}
-
-interface I18nContextType {
-  language: Language
-  setLanguage: (lang: Language) => void
-  t: (key: string) => string
-}
-
-const I18nContext = createContext<I18nContextType | undefined>(undefined)
+const I18nContext = createContext<any>(undefined)
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>('en')
-
-  useEffect(() => {
-    const saved = localStorage.getItem('language') as Language
-    if (saved && (saved === 'en' || saved === 'ar')) {
-      setLanguage(saved)
-    }
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem('language', language)
-  }, [language])
-
-  const t = (key: string): string => {
-    const keys = key.split('.')
-    let value: any = translations[language]
-    
-    for (const k of keys) {
-      if (value && typeof value === 'object' && k in value) {
-        value = value[k]
-      } else {
-        return key
-      }
-    }
-    
-    return typeof value === 'string' ? value : key
-  }
-
+  const t = (key: string): string => key
   return (
-    <I18nContext.Provider value={{ language, setLanguage, t }}>
+    <I18nContext.Provider value={{ language: 'en', setLanguage: () => {}, t }}>
       {children}
     </I18nContext.Provider>
   )

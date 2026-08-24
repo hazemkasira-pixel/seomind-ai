@@ -1,8 +1,17 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Linkedin, Plus, Trash2, ToggleLeft, ToggleRight, Clock, Calendar, ExternalLink } from 'lucide-react'
+import { Plus, Trash2, ToggleLeft, ToggleRight, Clock, Calendar, ExternalLink } from 'lucide-react'
 import { toast } from 'sonner'
+
+// ✅ أيقونة LinkedIn مخصصة لتجنب مشكلة lucide-react
+const LinkedinIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect width="4" height="12" x="2" y="9" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+)
 
 export function LinkedInAccountsManager() {
   const [accounts, setAccounts] = useState<any[]>([])
@@ -26,7 +35,6 @@ export function LinkedInAccountsManager() {
   }
 
   const handleConnectLinkedIn = () => {
-    // هنا هنعمل LinkedIn OAuth
     const linkedinAuthUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_ID}&redirect_uri=${encodeURIComponent(window.location.origin + '/api/linkedin/callback')}&scope=w_member_social,r_liteprofile`
     window.location.href = linkedinAuthUrl
   }
@@ -77,7 +85,7 @@ export function LinkedInAccountsManager() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
-            <Linkedin className="h-6 w-6 text-[#0077b5]" />
+            <LinkedinIcon className="h-6 w-6 text-[#0077b5]" />
             LinkedIn Accounts
           </h2>
           <p className="text-sm text-muted-foreground mt-1">
@@ -96,7 +104,7 @@ export function LinkedInAccountsManager() {
       {/* Accounts List */}
       {accounts.length === 0 ? (
         <div className="rounded-2xl border border-dashed border-border p-12 text-center">
-          <Linkedin className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+          <LinkedinIcon className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-foreground mb-2">No LinkedIn accounts connected</h3>
           <p className="text-sm text-muted-foreground mb-6">
             Connect your personal or company LinkedIn account to enable auto-publishing
@@ -116,7 +124,7 @@ export function LinkedInAccountsManager() {
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-4">
                   <div className="h-12 w-12 rounded-full bg-[#0077b5]/10 flex items-center justify-center">
-                    <Linkedin className="h-6 w-6 text-[#0077b5]" />
+                    <LinkedinIcon className="h-6 w-6 text-[#0077b5]" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground">{account.account_name}</h4>

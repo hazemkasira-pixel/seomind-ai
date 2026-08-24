@@ -68,7 +68,6 @@ export function SiteHeader() {
                 Dashboard
               </Link>
               <UserButton 
-                afterSignOutUrl="/"
                 appearance={{
                   elements: {
                     avatarBox: 'h-9 w-9 rounded-full border-2 border-teal/50 hover:border-teal transition-colors',
@@ -118,7 +117,7 @@ export function SiteHeader() {
                   Dashboard
                 </Link>
                 <div className="flex items-center gap-3 px-4 py-2">
-                  <UserButton afterSignOutUrl="/" />
+                  <UserButton />
                   <span className="text-sm text-muted-foreground">
                     {user?.firstName || user?.emailAddresses[0]?.emailAddress}
                   </span>

@@ -2,10 +2,9 @@ import type { Metadata } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
 import { Toaster } from 'sonner'
 import { Inter } from 'next/font/google'
-import { I18nProvider } from '@/lib/i18n' // ✅ إضافة مزود الترجمة
+import { I18nProvider } from '@/lib/i18n'
 import './globals.css'
 
-// ✅ تحميل الخط محلياً وتحسينه
 const inter = Inter({ 
   subsets: ['latin'],
   display: 'swap',
@@ -32,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <I18nProvider> {/* ✅ تغليف المحتوى بمزود الترجمة */}
+      <I18nProvider>
         <html lang="en" className={inter.className}>
           <body className="antialiased">
             {children}

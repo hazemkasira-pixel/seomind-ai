@@ -20,7 +20,7 @@ export default function SignupPage() {
               footerActionLink: 'text-teal hover:underline',
             },
           }}
-          redirectUrl="/dashboard"
+          
         />
       </div>
     </div>

@@ -553,7 +553,7 @@ export function DashboardView({ user, analyses, selectedAnalysis, profile }: any
             Back to Home
           </Link>
           <div className="flex items-center gap-3 rounded-xl bg-background/60 p-3 border border-border/50">
-            <UserButton afterSignOutUrl="/" />
+            <UserButton />
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold text-foreground truncate">{user.firstName || user.username || 'User'}</p>
               <p className="text-xs text-muted-foreground truncate">{user.emailAddresses?.[0]?.emailAddress}</p>

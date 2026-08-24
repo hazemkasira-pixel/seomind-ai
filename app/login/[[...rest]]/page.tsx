@@ -1,6 +1,6 @@
-import { SignIn } from '@clerk/nextjs'
+import { SignUp } from '@clerk/nextjs'
 
-export default function LoginPage() {
+export default function SignUpPage() {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4 relative overflow-hidden">
       {/* Background Orbs */}
@@ -8,7 +8,7 @@ export default function LoginPage() {
       <div className="pointer-events-none absolute left-1/2 top-10 h-[260px] w-[420px] max-w-[90vw] -translate-x-1/2 rounded-full bg-teal/10 blur-[120px]" />
 
       <div className="w-full max-w-md relative z-10">
-        <SignIn
+        <SignUp
           appearance={{
             elements: {
               rootBox: 'w-full',
@@ -21,7 +21,6 @@ export default function LoginPage() {
               footerActionLink: 'text-teal hover:underline',
             },
           }}
-          redirectUrl="/dashboard"
         />
       </div>
     </div>
