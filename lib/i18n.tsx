@@ -1,15 +1,36 @@
 'use client'
 
 import React, { createContext, useContext, ReactNode } from 'react'
+import en from '@/translations/en.json'
 
-const I18nContext = createContext<any>(undefined)
+type Translations = typeof en
+
+const I18nContext = createContext<{
+  language: 'en'
+  t: (key: string) => any
+}>({
+  language: 'en',
+  t: () => '',
+})
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  // دالة ترجمة مؤقتة ترجع المفتاح كما هو لتجنب أي أخطاء
-  const t = (key: string): string => key
+  const t = (key: string): any => {
+    const keys = key.split('.')
+    let value: any = en
+    
+    for (const k of keys) {
+      if (value && typeof value === 'object' && k in value) {
+        value = value[k]
+      } else {
+        return key
+      }
+    }
+    
+    return value
+  }
 
   return (
-    <I18nContext.Provider value={{ language: 'en', setLanguage: () => {}, t }}>
+    <I18nContext.Provider value={{ language: 'en', t }}>
       {children}
     </I18nContext.Provider>
   )
