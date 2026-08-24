@@ -2,7 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabase-admin'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// ✅ الحل الجذري: تهيئة Resend بشكل آمن لمنع انهيار الـ Build لو المفتاح غير موجود
+const resend = process.env.RESEND_API_KEY 
+  ? new Resend(process.env.RESEND_API_KEY) 
+  : null
 
 export async function GET(request: NextRequest) {
   // 1. التحقق من أن الطلب قادم من المجدول (Cron) وليس من شخص عادي
@@ -17,8 +20,8 @@ export async function GET(request: NextRequest) {
       .from('analyses')
       .select('*')
       .eq('auto_execution_ready', true)
-      .eq('wordpress_published', false) // تأكد من وجود هذا العمود في جدول analyses
-      .limit(3) // ننشر 3 مقالات كحد أقصى في اليوم عشان نجنب الـ Spam
+      .eq('wordpress_published', false)
+      .limit(3)
 
     if (error || !analyses || analyses.length === 0) {
       return NextResponse.json({ message: 'No pending analyses to publish', count: 0 })
@@ -56,7 +59,7 @@ export async function GET(request: NextRequest) {
         body: JSON.stringify({
           title: title,
           content: content,
-          status: 'publish', // غيّرها إلى 'draft' لو عايز تراجعها قبل النشر
+          status: 'publish',
         }),
       })
 
@@ -77,14 +80,20 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // 4. (اختياري لكن ممتاز) إرسال إيميل لك يوضح إن النشر تم بنجاح
-    if (publishedCount > 0 && process.env.CLIENT_EMAIL) {
-      await resend.emails.send({
-        from: 'SEO Mind AI <onboarding@resend.dev>',
-        to: [process.env.CLIENT_EMAIL],
-        subject: `✅ تم نشر ${publishedCount} مقال جديد على WordPress أوتوماتيكياً`,
-        html: `<p>مرحباً،<br>قام النظام بنشر ${publishedCount} مقال/تحليل جديد بنجاح على موقع مغاسلنا اليوم.</p>`
-      })
+    // 4. إرسال إيميل للإشعار (مع حماية كاملة ضد انهيار الـ Build)
+    if (publishedCount > 0 && process.env.CLIENT_EMAIL && resend) {
+      try {
+        await resend.emails.send({
+          from: 'SEO Mind AI <onboarding@resend.dev>',
+          to: [process.env.CLIENT_EMAIL],
+          subject: `✅ تم نشر ${publishedCount} مقال جديد على WordPress أوتوماتيكياً`,
+          html: `<p>مرحباً،<br>قام النظام بنشر ${publishedCount} مقال/تحليل جديد بنجاح على موقع مغاسلنا اليوم.</p>`
+        })
+      } catch (emailError) {
+        console.error('Failed to send email notification:', emailError)
+      }
+    } else if (publishedCount > 0 && !resend) {
+      console.warn('⚠️ Resend API key is missing. Email notification skipped (Build safe).')
     }
 
     return NextResponse.json({ 
