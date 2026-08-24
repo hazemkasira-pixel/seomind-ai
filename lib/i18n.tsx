@@ -2,13 +2,13 @@
 
 import React, { createContext, useContext, ReactNode } from 'react'
 
-// ✅ بيانات الترجمة المدمجة (عشان نضمن إنها تشتغل)
+// ✅ بيانات الترجمة المدمجة
 const translations = {
   hero: {
-    badge: 'AI-Powered SEO Analysis',
-    title1: 'Dominate Local SEO',
-    title2: 'with AI Intelligence',
-    subtitle: 'Get instant, actionable SEO insights powered by advanced AI. Analyze, optimize, and dominate your local market.',
+    badge: 'Set It & Forget It SEO',
+    title1: 'Automate Your SEO',
+    title2: 'With AI Intelligence',
+    subtitle: 'Launch your SEO strategy in minutes. Our AI analyzes, optimizes, and publishes content automatically while you focus on growing your business.',
     form: {
       error: 'Please fill in all required fields'
     },
@@ -65,8 +65,9 @@ const translations = {
   }
 }
 
+// ✅ الحل: تغيير النوع ليشمل 'en' | 'ar'
 const I18nContext = createContext<{
-  language: 'en'
+  language: 'en' | 'ar'  // <-- هنا التعديل!
   t: (key: string) => any
 }>({
   language: 'en',
