@@ -6,7 +6,6 @@ import { ArrowRight, Sparkles, Zap, Loader2, Globe, Briefcase, MapPin, AlertCirc
 import { CustomSelect } from './custom-select'
 import { nicheGroups, countries } from '@/lib/select-data'
 import { useRouter } from 'next/navigation'
-import { useTranslation } from '@/lib/i18n'
 import { createClient } from '@/lib/supabase-client'
 
 const careerGoals = [
@@ -28,7 +27,6 @@ const experienceOptions = [
 
 export function HeroSection() {
   const router = useRouter()
-  const { t, language } = useTranslation()
   const supabase = createClient()
   
   const [accountType, setAccountType] = useState<'personal' | 'company' | null>(null)
@@ -43,17 +41,16 @@ export function HeroSection() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
-  // ✅ الحماية: التأكد من أن البيانات مصفوفة قبل عمل map
   const getTranslatedOptions = (items: any[] | undefined) => {
     return (items || []).map((item: any) => ({
       value: item.value,
-      label: language === 'ar' ? (item.labelAr || item.label) : item.label
+      label: item.label
     }))
   }
 
   const getTranslatedGroups = (groups: any[] | undefined) => {
     return (groups || []).map((group: any) => ({
-      label: language === 'ar' ? (group.labelAr || group.label) : group.label,
+      label: group.label,
       options: getTranslatedOptions(group.options)
     }))
   }
@@ -84,12 +81,12 @@ export function HeroSection() {
     setError('')
 
     if (!accountType) {
-      setError('يرجى اختيار نوع الحساب أولاً')
+      setError('Please select an account type first')
       return
     }
 
     if (!url || !niche || !selectedCountry) {
-      setError(t('hero.form.error'))
+      setError('Please fill in all required fields')
       return
     }
 
@@ -156,18 +153,18 @@ export function HeroSection() {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 rounded-full border border-teal/30 bg-teal/5 px-4 py-1.5 text-sm font-medium text-teal mb-6">
             <Sparkles className="h-4 w-4" />
-            {t('hero.badge')}
+            AI-Powered SEO Analysis
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 leading-tight">
-            {t('hero.title1')}{' '}
+            Dominate Local SEO{' '}
             <span className="bg-gradient-to-r from-teal to-purple bg-clip-text text-transparent">
-              {t('hero.title2')}
+              with AI Intelligence
             </span>
           </h1>
           
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t('hero.subtitle')}
+            Get instant, actionable SEO insights powered by advanced AI. Analyze, optimize, and dominate your local market.
           </p>
         </div>
 
@@ -182,7 +179,7 @@ export function HeroSection() {
           {!accountType && (
             <div className="space-y-6">
               <h2 className="text-2xl font-bold text-foreground text-center mb-8">
-                {language === 'ar' ? 'ماذا يصفك بشكل أفضل؟' : 'What best describes you?'}
+                What best describes you?
               </h2>
               
               <div className="grid md:grid-cols-2 gap-6">
@@ -195,15 +192,13 @@ export function HeroSection() {
                     <User className="h-8 w-8 text-teal" />
                   </div>
                   <h3 className="text-2xl font-bold text-foreground mb-3">
-                    {language === 'ar' ? 'علامة تجارية شخصية / فرد' : 'Personal Brand / Individual'}
+                    Personal Brand / Individual
                   </h3>
                   <p className="text-muted-foreground mb-4">
-                    {language === 'ar' 
-                      ? 'أريد بناء علامتي التجارية الشخصية، وتعزيز تواجدي على لينكدإن، والنمو كمحترف أو صانع محتوى.'
-                      : 'I want to build my personal brand, grow my LinkedIn presence, and establish myself as a thought leader.'}
+                    I want to build my personal brand, grow my LinkedIn presence, and establish myself as a thought leader.
                   </p>
                   <div className="flex items-center text-teal font-semibold">
-                    {language === 'ar' ? 'ابدأ الآن' : 'Get Started'}
+                    Get Started
                     <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </button>
@@ -217,15 +212,13 @@ export function HeroSection() {
                     <Building2 className="h-8 w-8 text-purple" />
                   </div>
                   <h3 className="text-2xl font-bold text-foreground mb-3">
-                    {language === 'ar' ? 'شركة / نشاط تجاري' : 'Company / Business'}
+                    Company / Business
                   </h3>
                   <p className="text-muted-foreground mb-4">
-                    {language === 'ar'
-                      ? 'أريد تعزيز التواجد الرقمي لشركتي، تحسين محركات البحث (SEO)، وأتمتة نشر المحتوى التسويقي.'
-                      : 'I want to grow my company\'s online presence, improve SEO, and automate content marketing.'}
+                    I want to grow my company's online presence, improve SEO, and automate content marketing.
                   </p>
                   <div className="flex items-center text-purple font-semibold">
-                    {language === 'ar' ? 'ابدأ الآن' : 'Get Started'}
+                    Get Started
                     <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </button>
@@ -243,16 +236,14 @@ export function HeroSection() {
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 group"
                 >
                   <ArrowRight className="h-4 w-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
-                  {language === 'ar' ? 'الرجوع لاختيار نوع الحساب' : 'Back to account type selection'}
+                  Back to account type selection
                 </button>
 
                 <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium ${
                   accountType === 'personal' ? 'bg-teal/10 text-teal border border-teal/20' : 'bg-purple/10 text-purple border border-purple/20'
                 }`}>
                   {accountType === 'personal' ? <User className="h-4 w-4" /> : <Building2 className="h-4 w-4" />}
-                  {accountType === 'personal' 
-                    ? (language === 'ar' ? 'علامة تجارية شخصية' : 'Personal Brand')
-                    : (language === 'ar' ? 'شركة / نشاط تجاري' : 'Company / Business')}
+                  {accountType === 'personal' ? 'Personal Brand' : 'Company / Business'}
                 </div>
               </div>
 
@@ -263,10 +254,10 @@ export function HeroSection() {
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-foreground">
-                      {language === 'ar' ? 'المعلومات الأساسية' : 'Basic Information'}
+                      Basic Information
                     </h3>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      {language === 'ar' ? 'معلومات أساسية عن وجودك الرقمي' : 'Essential information about your online presence'}
+                      Essential information about your online presence
                     </p>
                   </div>
                 </div>
@@ -275,17 +266,15 @@ export function HeroSection() {
                   <div className="space-y-2">
                     <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                       <Globe className="h-4 w-4 text-teal" />
-                      {accountType === 'personal' 
-                        ? (language === 'ar' ? 'رابط الملف الشخصي' : 'Online Presence')
-                        : (language === 'ar' ? 'رابط الموقع' : 'Website URL')}
+                      {accountType === 'personal' ? 'Online Presence' : 'Website URL'}
                     </label>
                     <input
                       type="text"
                       value={url}
                       onChange={(e) => setUrl(e.target.value)}
                       placeholder={accountType === 'personal' 
-                        ? (language === 'ar' ? 'linkedin.com/in/yourname أو portfolio.com' : 'linkedin.com/in/yourname or portfolio.com')
-                        : (language === 'ar' ? 'https://yoursite.com' : 'https://yoursite.com')}
+                        ? 'linkedin.com/in/yourname or portfolio.com'
+                        : 'https://yoursite.com'}
                       className="h-12 w-full rounded-xl border border-border bg-background/50 px-4 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-teal/50 focus:ring-2 focus:ring-teal/20"
                     />
                   </div>
@@ -293,16 +282,14 @@ export function HeroSection() {
                   <div className="space-y-2">
                     <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                       <Briefcase className="h-4 w-4 text-teal" />
-                      {accountType === 'personal' 
-                        ? (language === 'ar' ? 'مجال التخصص' : 'Professional Field')
-                        : (language === 'ar' ? 'مجال النشاط التجاري' : 'Business Niche')}
+                      {accountType === 'personal' ? 'Professional Field' : 'Business Niche'}
                     </label>
                     <CustomSelect
                       value={niche}
                       onChange={setNiche}
                       placeholder={accountType === 'personal'
-                        ? (language === 'ar' ? 'اختر مجال تخصصك' : 'Select your professional field')
-                        : (language === 'ar' ? 'اختر مجال نشاطك التجاري' : 'Select your business niche')}
+                        ? 'Select your professional field'
+                        : 'Select your business niche'}
                       groups={translatedNicheGroups}
                       searchable={true}
                     />
@@ -313,7 +300,7 @@ export function HeroSection() {
                   <div className="space-y-2">
                     <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                       <MapPin className="h-4 w-4 text-teal" />
-                      {language === 'ar' ? 'الدولة المستهدفة' : 'Target Country'}
+                      Target Country
                     </label>
                     <CustomSelect
                       value={selectedCountry}
@@ -322,9 +309,9 @@ export function HeroSection() {
                         setSelectedCity('')
                         setCoverageCities([])
                       }}
-                      placeholder={language === 'ar' ? 'اختر الدولة المستهدفة' : 'Select target country'}
+                      placeholder="Select target country"
                       groups={[{ 
-                        label: language === 'ar' ? 'الدول' : 'Countries', 
+                        label: 'Countries', 
                         options: translatedCountries
                       }]}
                       searchable={true}
@@ -334,9 +321,9 @@ export function HeroSection() {
                   <div className="space-y-2">
                     <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                       <MapPin className="h-4 w-4 text-purple" />
-                      {language === 'ar' ? 'المدينة الأساسية' : 'Primary City'}
+                      Primary City
                       <span className="text-xs font-normal text-muted-foreground ml-1">
-                        {language === 'ar' ? '(اختياري)' : '(Optional)'}
+                        (Optional)
                       </span>
                     </label>
                     
@@ -344,34 +331,33 @@ export function HeroSection() {
                       <CustomSelect
                         value={selectedCity}
                         onChange={setSelectedCity}
-                        placeholder={language === 'ar' ? 'اختر المدينة' : 'Select city'}
+                        placeholder="Select city"
                         groups={[{ 
-                          label: language === 'ar' ? 'المدن' : 'Cities', 
+                          label: 'Cities', 
                           options: getTranslatedOptions(selectedCountryData.cities)
                         }]}
                         searchable={true}
                       />
                     ) : (
                       <div className="h-12 w-full rounded-xl border border-border bg-background/30 px-4 text-sm text-muted-foreground/60 flex items-center">
-                        {language === 'ar' ? 'اختر الدولة أولاً' : 'Select country first'}
+                        Select country first
                       </div>
                     )}
                   </div>
                 </div>
 
-                {/* ✅ هنا تم إضافة الحماية (|| []) لمنع خطأ .map */}
                 {selectedCountry && selectedCountryData?.cities && selectedCountryData.cities.length > 0 && (
                   <div className="space-y-3 pt-2">
                     <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                       <MapPin className="h-4 w-4 text-teal" />
-                      {language === 'ar' ? 'مدن التغطية' : 'Coverage Cities'}
+                      Coverage Cities
                       <span className="text-xs font-normal text-muted-foreground ml-1">
-                        {language === 'ar' ? '(اختياري - يمكنك اختيار أكثر من مدينة)' : '(Optional - Select multiple)'}
+                        (Optional - Select multiple)
                       </span>
                     </label>
                     <div className="flex flex-wrap gap-2">
                       {(selectedCountryData.cities || []).map((city: any) => {
-                        const cityLabel = language === 'ar' ? (city.labelAr || city.label) : city.label
+                        const cityLabel = city.label
                         const isSelected = coverageCities.includes(city.value)
                         return (
                           <button
@@ -403,15 +389,15 @@ export function HeroSection() {
                       </div>
                       <div>
                         <h3 className="text-lg font-bold text-foreground">
-                          {language === 'ar' ? 'معلوماتك المهنية' : 'Professional Details'}
+                          Professional Details
                         </h3>
                         <p className="text-xs text-muted-foreground mt-0.5">
-                          {language === 'ar' ? 'هذه المعلومات ستحسن جودة التحليل' : 'This information will improve analysis quality'}
+                          This information will improve analysis quality
                         </p>
                       </div>
                     </div>
                     <span className="text-xs px-3 py-1.5 rounded-full bg-teal/10 text-teal font-medium border border-teal/20">
-                      {language === 'ar' ? 'مُحسّن للتحليل' : 'Enhanced Analysis'}
+                      Enhanced Analysis
                     </span>
                   </div>
                   
@@ -419,13 +405,13 @@ export function HeroSection() {
                     <div className="space-y-2">
                       <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                         <BriefcaseBusiness className="h-4 w-4 text-teal" />
-                        {language === 'ar' ? 'المسمى الوظيفي' : 'Job Title / Role'}
+                        Job Title / Role
                       </label>
                       <input
                         type="text"
                         value={jobTitle}
                         onChange={(e) => setJobTitle(e.target.value)}
-                        placeholder={language === 'ar' ? 'مثال: Marketing Manager, CEO, Freelancer' : 'e.g., Marketing Manager, CEO, Freelancer'}
+                        placeholder="e.g., Marketing Manager, CEO, Freelancer"
                         className="h-12 w-full rounded-xl border border-border bg-background/50 px-4 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-teal/50 focus:ring-2 focus:ring-teal/20"
                       />
                     </div>
@@ -433,14 +419,14 @@ export function HeroSection() {
                     <div className="space-y-2">
                       <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                         <TrendingUp className="h-4 w-4 text-teal" />
-                        {language === 'ar' ? 'سنوات الخبرة' : 'Years of Experience'}
+                        Years of Experience
                       </label>
                       <CustomSelect
                         value={experience}
                         onChange={setExperience}
-                        placeholder={language === 'ar' ? 'اختر...' : 'Select...'}
+                        placeholder="Select..."
                         groups={[{ 
-                          label: language === 'ar' ? 'الخبرة' : 'Experience', 
+                          label: 'Experience', 
                           options: translatedExperienceOptions 
                         }]}
                         searchable={false}
@@ -451,14 +437,14 @@ export function HeroSection() {
                   <div className="space-y-2">
                     <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
                       <Target className="h-4 w-4 text-teal" />
-                      {language === 'ar' ? 'الهدف المهني الأساسي' : 'Primary Career Goal'}
+                      Primary Career Goal
                     </label>
                     <CustomSelect
                       value={selectedGoal}
                       onChange={setSelectedGoal}
-                      placeholder={language === 'ar' ? 'اختر هدفك المهني' : 'Select your career goal'}
+                      placeholder="Select your career goal"
                       groups={[{ 
-                        label: language === 'ar' ? 'الأهداف' : 'Goals', 
+                        label: 'Goals', 
                         options: translatedCareerGoals 
                       }]}
                       searchable={false}
@@ -475,13 +461,11 @@ export function HeroSection() {
                 {isLoading ? (
                   <>
                     <Loader2 className="h-5 w-5 animate-spin" />
-                    {language === 'ar' ? 'جاري التحليل...' : 'Analyzing...'}
+                    Analyzing...
                   </>
                 ) : (
                   <>
-                    {accountType === 'personal'
-                      ? (language === 'ar' ? 'حلل ملفي الشخصي' : 'Analyze My Profile')
-                      : (language === 'ar' ? 'حلل موقعي' : 'Analyze My Website')}
+                    {accountType === 'personal' ? 'Analyze My Profile' : 'Analyze My Website'}
                     <ArrowRight className="h-5 w-5" />
                   </>
                 )}
@@ -495,21 +479,21 @@ export function HeroSection() {
                 <div className="p-1.5 rounded-lg bg-teal/10 group-hover:bg-teal/20 transition-colors">
                   <Zap className="h-4 w-4 text-teal" />
                 </div>
-                <span className="font-medium">{t('hero.features.instant')}</span>
+                <span className="font-medium">Instant Analysis</span>
               </div>
               <div className="w-px h-4 bg-border hidden sm:block" />
               <div className="flex items-center gap-2.5 group">
                 <div className="p-1.5 rounded-lg bg-purple/10 group-hover:bg-purple/20 transition-colors">
                   <Sparkles className="h-4 w-4 text-purple" />
                 </div>
-                <span className="font-medium">{t('hero.features.ai')}</span>
+                <span className="font-medium">AI-Powered</span>
               </div>
               <div className="w-px h-4 bg-border hidden sm:block" />
               <div className="flex items-center gap-2.5 group">
                 <div className="p-1.5 rounded-lg bg-teal/10 group-hover:bg-teal/20 transition-colors">
                   <Globe className="h-4 w-4 text-teal" />
                 </div>
-                <span className="font-medium">{t('hero.features.local')}</span>
+                <span className="font-medium">Local Focus</span>
               </div>
             </div>
 
@@ -534,7 +518,7 @@ export function HeroSection() {
 
         <div className="mt-8 text-center">
           <p className="text-sm text-muted-foreground mb-4">
-            {t('hero.trusted')}
+            Trusted by SEO professionals worldwide
           </p>
           <div className="flex items-center justify-center gap-8 opacity-50 grayscale">
             <div className="h-8 w-20 bg-muted rounded" />
