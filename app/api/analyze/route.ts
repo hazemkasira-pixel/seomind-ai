@@ -3,14 +3,14 @@ import { currentUser } from '@clerk/nextjs/server'
 import { supabaseAdmin } from '@/lib/supabase-admin'
 
 const GROQ_API_KEY = process.env.GROQ_API_KEY
-// ✅ استخدام الموديل المتاح في حسابك حالياً
-const GROQ_MODEL = 'groq/compound'
+// ✅ تم تعديل اسم الموديل إلى الموديل الصحيح والأقوى في Groq
+const GROQ_MODEL = 'llama-3.3-70b-versatile'
 
 export async function POST(request: Request) {
   try {
     const user = await currentUser()
     const body = await request.json()
-    const { url, niche, location, competitorUrl, coverageCities } = body
+    const { url, niche, location, competitorUrl, coverageCities, accountType, jobTitle, experience, careerGoal } = body
 
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     if (!url || !niche || !location) return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
@@ -21,12 +21,13 @@ export async function POST(request: Request) {
 
     const seoPrompt = `
       You are an AI MARKETING MANAGER. Analyze and strategize.
-      WEBSITE: ${url}
+      WEBSITE/PROFILE: ${url}
       NICHE: ${niche}
       LOCATION: ${geoScope}
+      ${accountType === 'personal' ? `JOB TITLE: ${jobTitle}\nEXPERIENCE: ${experience}\nCAREER GOAL: ${careerGoal}` : ''}
       ${coverageCities && coverageCities.length > 0 ? `COVERAGE CITIES: ${coverageCities.join(', ')}` : ''}
 
-      Respond with valid JSON ONLY (no markdown, no extra text):
+      Respond with valid JSON ONLY (no markdown, no extra text, no code blocks):
       {
         "seoScore": 75,
         "geoScope": "${geoScope}",
@@ -55,11 +56,12 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         model: GROQ_MODEL,
         messages: [
-          { role: 'system', content: 'You are an AI marketing manager. Respond with valid JSON ONLY.' },
+          { role: 'system', content: 'You are an expert AI marketing manager. Respond with valid JSON ONLY. Do not wrap the JSON in markdown code blocks.' },
           { role: 'user', content: seoPrompt }
         ],
         temperature: 0.7,
         max_tokens: 2000,
+        response_format: { type: "json_object" } // لضمان إخراج JSON نظيف
       }),
     })
 
@@ -74,14 +76,16 @@ export async function POST(request: Request) {
 
     let analysisData
     try {
+      // تنظيف النص من أي علامات markdown زائدة قد يضيفها النموذج
       const cleanJson = content.replace(/```json/g, '').replace(/```/g, '').trim()
       analysisData = JSON.parse(cleanJson)
-      console.log('✅ Analysis completed!')
+      console.log('✅ Analysis completed successfully!')
     } catch (parseError) {
-      console.error('❌ JSON Parse Error:', parseError)
+      console.error('❌ JSON Parse Error:', parseError, 'Raw content:', content)
+      // Fallback data in case of parse error
       analysisData = {
         seoScore: 70, geoScope: geoScope, discoveredCompetitors: [], recommendedTarget: 'Pending',
-        issues: ['Parse error'], recommendations: ['Review manually'], keywords: [niche],
+        issues: ['Parse error, please review manually'], recommendations: ['Review manually'], keywords: [niche],
         thirtyDayPlan: ['Week 1-4: Focus on content'], blogPostTitles: ['Best guide'],
         contentStrategy: 'Focus on quality', competitorInsights: 'Pending', autoExecutionReady: false, nextAction: 'Manual review'
       }
@@ -91,19 +95,32 @@ export async function POST(request: Request) {
     const { data: savedAnalysis, error: dbError } = await supabaseAdmin
       .from('analyses')
       .insert({
-        user_id: userId, url, niche, location, competitor_url: competitorUrl || null,
-        seo_score: analysisData.seoScore || 0, issues: analysisData.issues || [],
-        recommendations: analysisData.recommendations || [], keywords: analysisData.keywords || [],
-        competitor_insights: analysisData.competitorInsights || '', content_strategy: analysisData.contentStrategy || '',
-        discovered_competitors: analysisData.discoveredCompetitors || [], recommended_target: analysisData.recommendedTarget || '',
-        thirty_day_plan: analysisData.thirtyDayPlan || [], blog_post_titles: analysisData.blogPostTitles || [],
-        geo_scope: analysisData.geoScope || geoScope, auto_execution_ready: analysisData.autoExecutionReady || false,
-        next_action: analysisData.nextAction || '', status: 'completed',
+        user_id: userId, 
+        url, 
+        niche, 
+        location, 
+        competitor_url: competitorUrl || null,
+        seo_score: analysisData.seoScore || 0, 
+        issues: analysisData.issues || [],
+        recommendations: analysisData.recommendations || [], 
+        keywords: analysisData.keywords || [],
+        competitor_insights: analysisData.competitorInsights || '', 
+        content_strategy: analysisData.contentStrategy || '',
+        discovered_competitors: analysisData.discoveredCompetitors || [], 
+        recommended_target: analysisData.recommendedTarget || '',
+        thirty_day_plan: analysisData.thirtyDayPlan || [], 
+        blog_post_titles: analysisData.blogPostTitles || [],
+        geo_scope: analysisData.geoScope || geoScope, 
+        auto_execution_ready: analysisData.autoExecutionReady || false,
+        next_action: analysisData.nextAction || '', 
+        status: 'completed',
       })
       .select()
       .single()
 
-    if (dbError) console.error(' Database Error:', dbError)
+    if (dbError) {
+      console.error('❌ Database Error:', dbError)
+    }
 
     return NextResponse.json({
       success: true,
